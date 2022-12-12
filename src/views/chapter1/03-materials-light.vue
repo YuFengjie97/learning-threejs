@@ -7,17 +7,18 @@
 </template>
 
 <script lang="ts" setup>
+/**
+让物体产生阴影
+1.plane需要将材质改为MeshLambertMaterial，并且设置receiveShadow为ture，这样材质表面才可以显示物体投射的阴影
+2.renderer.shadowMap.enabled = true 表示渲染器允许阴影的渲染
+3.light castShadow = true，表示投射阴影
+4.物体mesh castShadow = true，表示投射阴影
+*/
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-
-// 后期处理相关
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass'
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 
 const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
@@ -34,6 +35,8 @@ let renderer: THREE.WebGLRenderer
 onMounted(() => {
   initGUI()
   initTHREE()
+  initMesh()
+  initLight()
   render()
 })
 
@@ -47,19 +50,59 @@ function initGUI() {
   canvasCon.value?.appendChild(gui.domElement)
 }
 
+function initMesh(){
+  const planeGeo = new THREE.PlaneGeometry(60, 20)
+  const planeMat = new THREE.MeshLambertMaterial({ color: 0xcccccc })
+  const planeMesh = new THREE.Mesh(planeGeo, planeMat)
+  planeMesh.rotation.x = -0.5*PI
+  planeMesh.receiveShadow = true;
+  scene.add(planeMesh)
+
+  const cubeGeo = new THREE.BoxGeometry(4,4,4)
+  const cubeMat = new THREE.MeshLambertMaterial({color: 0xff0000, wireframe: false})
+  const cubeMesh = new THREE.Mesh(cubeGeo, cubeMat)
+  cubeMesh.position.set(-14,2,0)
+  cubeMesh.castShadow = true
+  scene.add(cubeMesh)
+
+  const sphereGeo = new THREE.SphereGeometry(4)
+  const sphereMat = new THREE.MeshLambertMaterial({ color: 0x7777ff, wireframe: false })
+  const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat)
+  sphereMesh.position.set(14, 4, 0)
+  sphereMesh.castShadow = true
+  scene.add(sphereMesh)
+}
+
+function initLight(){
+  const spotLight = new THREE.SpotLight(0xffffff)
+  spotLight.position.set(-20 ,10 , 0)
+  spotLight.castShadow = true
+  const helper = new THREE.SpotLightHelper(spotLight)
+  scene.add(helper)
+  scene.add(spotLight)
+}
+
 function animate() {
   // doSomething
+}
+// 绘制
+function render() {
+  requestAnimationFrame(render)
+  stats.update()
+  animate()
+  renderer.render(scene, camera)
 }
 // three初始化
 function initTHREE() {
   scene = new THREE.Scene()
   scene.background = new THREE.Color(0x444444)
-  camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000)
+  camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
   renderer = new THREE.WebGLRenderer({
     canvas: canvasDom.value,
     antialias: true
   })
   renderer.setSize(width, height)
+  renderer.shadowMap.enabled = true
   // renderer.setPixelRatio(window.devicePixelRatio) // 不推荐
   window.addEventListener('resize', onWindowResize)
 
@@ -67,7 +110,7 @@ function initTHREE() {
   scene.add(new THREE.AxesHelper(1000))
 
   // 环境光
-  scene.add(new THREE.AmbientLight(0x404040))
+  // scene.add(new THREE.AmbientLight(0x404040))
 
   // 帧率状态
   stats = Stats()
@@ -76,15 +119,8 @@ function initTHREE() {
   // 轨道控制器
   orbitControls = new OrbitControls(camera, renderer.domElement)
   orbitControls.target = new THREE.Vector3(0, 0, 0)
-  orbitControls.object.position.set(100, 100, 100)
+  orbitControls.object.position.set(0, 20, 20)
   orbitControls.update()
-}
-// 绘制
-function render() {
-  requestAnimationFrame(render)
-  stats.update()
-  animate()
-  renderer.render(scene, camera)
 }
 // 自适应
 function onWindowResize() {

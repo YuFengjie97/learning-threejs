@@ -11,9 +11,21 @@ const routes: Array<RouteRecordRaw> = [
     path: '/chapter1/',
     children: [
       {
-        path: '01-template',
-        component: () => import('@/views/chapter1/01-template.vue'),
+        path: '01-basic-skeleton',
+        component: () => import('@/views/chapter1/01-basic-skeleton.vue'),
       },
+      {
+        path: '02-first-scene',
+        component: ()=>import('@/views/chapter1/02-first-scene.vue')
+      },
+      {
+        path: '03-materials-light',
+        component: ()=>import('@/views/chapter1/03-materials-light.vue')
+      },
+      {
+        path: '04-materials-light-animation',
+        component: ()=>import('@/views/chapter1/04-materials-light-animation.vue')
+      }
     ],
   },
   { path: '/:path(.*)', component: NotFound },
