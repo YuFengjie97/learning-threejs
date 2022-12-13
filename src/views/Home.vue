@@ -12,6 +12,8 @@
     <RouterLink to="/chapter2/03-forced-materials">03-forced-materials</RouterLink>
     <RouterLink to="/chapter2/05-custom-geometry">05-custom-geometry</RouterLink>
     <RouterLink to="/chapter2/06-mesh-properties">06-mesh-properties</RouterLink>
+    <RouterLink to="/chapter2/07-both-cameras">07-both-cameras</RouterLink>
+    
   </div>
 </template>
 

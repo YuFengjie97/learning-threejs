@@ -50,6 +50,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '06-mesh-properties',
         component: ()=>import('@/views/chapter2/06-mesh-properties.vue')
+      },
+      {
+        path: '07-both-cameras',
+        component: ()=>import('@/views/chapter2/07-both-cameras.vue')
       }
       
       
