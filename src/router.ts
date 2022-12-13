@@ -46,7 +46,12 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '05-custom-geometry',
         component: ()=>import('@/views/chapter2/05-custom-geometry.vue')
+      },
+      {
+        path: '06-mesh-properties',
+        component: ()=>import('@/views/chapter2/06-mesh-properties.vue')
       }
+      
       
       
     ]
