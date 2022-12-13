@@ -28,6 +28,29 @@ const routes: Array<RouteRecordRaw> = [
       }
     ],
   },
+  {
+    path: '/chapter2/',
+    children: [
+      {
+        path: '01-basic-scene',
+        component: ()=>import('@/views/chapter2/01-basic-scene.vue')
+      },
+      {
+        path: '02-foggy-scene',
+        component: ()=>import('@/views/chapter2/02-foggy-scene.vue')
+      },
+      {
+        path: '03-forced-materials',
+        component: ()=>import('@/views/chapter2/03-forced-materials.vue')
+      },
+      {
+        path: '05-custom-geometry',
+        component: ()=>import('@/views/chapter2/05-custom-geometry.vue')
+      }
+      
+      
+    ]
+  },
   { path: '/:path(.*)', component: NotFound },
 ]
 

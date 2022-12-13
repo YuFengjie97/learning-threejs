@@ -4,8 +4,13 @@
     <RouterLink to="/chapter1/01-basic-skeleton">01-basic-skeleton</RouterLink>
     <RouterLink to="/chapter1/02-first-scene">02-first-scene</RouterLink>
     <RouterLink to="/chapter1/03-materials-light">03-materials-light</RouterLink>
-    
     <RouterLink to="/chapter1/04-materials-light-animation">04-materials-light-animation</RouterLink>
+
+    <h1>Chapter2</h1>
+    <RouterLink to="/chapter2/01-basic-scene">01-basic-scene</RouterLink>
+    <RouterLink to="/chapter2/02-foggy-scene">02-foggy-scene</RouterLink>
+    <RouterLink to="/chapter2/03-forced-materials">03-forced-materials</RouterLink>
+    <RouterLink to="/chapter2/05-custom-geometry">05-custom-geometry</RouterLink>
   </div>
 </template>
 
@@ -15,5 +20,30 @@ import { ref} from 'vue';
 </script>
 
 <style lang='less' scoped>
-.home{}
+.home{
+  padding: 10rem;
+  display: flex;
+  flex-flow: column nowrap;
+  @media screen and (max-width: 576px) {
+    padding: 1rem;
+  }
+
+  h1{
+    padding: 2rem 0rem;
+  }
+  a{
+    padding: 0.3rem 0;
+    padding-left: 2rem;
+    display: inline-block;
+    font-size: 1.2rem;
+    color: rgb(132, 132, 132);
+    transition: .3s;
+    &:link{}
+    &:hover{
+      color: #fff;
+    }
+    &:visited{}
+    &:active{}
+  }
+}
 </style>
