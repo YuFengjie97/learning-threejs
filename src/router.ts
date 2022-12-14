@@ -54,10 +54,11 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '07-both-cameras',
         component: ()=>import('@/views/chapter2/07-both-cameras.vue')
+      },
+      {
+        path: '08-cameras-lookat',
+        component: ()=>import('@/views/chapter2/08-cameras-lookat.vue')
       }
-      
-      
-      
     ]
   },
   { path: '/:path(.*)', component: NotFound },

@@ -7,6 +7,11 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * 添加一个小球作为相机焦点，相机焦点随小球运动
+ * 这里没有直接使用camera，而是使用轨道控制器。
+ * 在修改轨道控制器焦点（也就是相机焦点）后，需要重新调用update方法来更新
+ */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
@@ -26,6 +31,7 @@ let camera: THREE.PerspectiveCamera | THREE.OrthographicCamera
 let renderer: THREE.WebGLRenderer
 
 let planeMesh: THREE.Mesh
+let lookAtMesh: THREE.Mesh
 
 onMounted(() => {
   initTHREE()
@@ -95,6 +101,10 @@ function initMesh() {
       scene.add(mesh)
     }
   }
+  const lookAtGeo = new THREE.SphereGeometry(2)
+  lookAtMesh = new THREE.Mesh(lookAtGeo,new THREE.MeshLambertMaterial({color:0xfdcb6e}))
+  lookAtMesh.position.set(0, 10, 0)
+  scene.add(lookAtMesh)
 }
 
 function initLight() {
@@ -109,7 +119,14 @@ function initSpotLight(x: number, y: number, z: number) {
   scene.add(spotLight)
 }
 
-function animate() {}
+let step = 0
+function animate() {
+  step += 0.02
+  let x = 10 + 100 * sin(step)
+  lookAtMesh.position.x = x
+  orbitControls.target = lookAtMesh.position
+  orbitControls.update()
+}
 // 绘制
 function render() {
   requestAnimationFrame(render)

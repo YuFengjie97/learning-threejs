@@ -13,6 +13,7 @@
     <RouterLink to="/chapter2/05-custom-geometry">05-custom-geometry</RouterLink>
     <RouterLink to="/chapter2/06-mesh-properties">06-mesh-properties</RouterLink>
     <RouterLink to="/chapter2/07-both-cameras">07-both-cameras</RouterLink>
+    <RouterLink to="/chapter2/08-cameras-lookat">08-cameras-lookat</RouterLink>
     
   </div>
 </template>
