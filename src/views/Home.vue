@@ -14,6 +14,9 @@
     <RouterLink to="/chapter2/06-mesh-properties">06-mesh-properties</RouterLink>
     <RouterLink to="/chapter2/07-both-cameras">07-both-cameras</RouterLink>
     <RouterLink to="/chapter2/08-cameras-lookat">08-cameras-lookat</RouterLink>
+
+    <h1>Chapter3</h1>
+    <RouterLink to="/chapter3/01-ambient-light">01-ambient-light</RouterLink>
     
   </div>
 </template>
