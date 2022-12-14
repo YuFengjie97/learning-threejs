@@ -17,6 +17,7 @@
 
     <h1>Chapter3</h1>
     <RouterLink to="/chapter3/01-ambient-light">01-ambient-light</RouterLink>
+    <RouterLink to="/chapter3/02-point-light">02-point-light</RouterLink>
     
   </div>
 </template>
