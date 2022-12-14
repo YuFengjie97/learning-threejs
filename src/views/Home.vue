@@ -18,7 +18,7 @@
     <h1>Chapter3</h1>
     <RouterLink to="/chapter3/01-ambient-light">01-ambient-light</RouterLink>
     <RouterLink to="/chapter3/02-point-light">02-point-light</RouterLink>
-    
+    <RouterLink to="/chapter3/03-spot-light">03-spot-light</RouterLink>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ import { ref} from 'vue';
 
 <style lang='less' scoped>
 .home{
-  padding: 10rem;
+  padding: 1rem 10rem;
   display: flex;
   flex-flow: column nowrap;
   @media screen and (max-width: 576px) {
