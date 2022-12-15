@@ -22,6 +22,7 @@
     <RouterLink to="/chapter3/04-directional-light">04-directional-light</RouterLink>
     <RouterLink to="/chapter3/05-hemisphere-light">05-hemisphere-light</RouterLink>
     <RouterLink to="/chapter3/06-area-light">06-area-light</RouterLink>
+    <RouterLink to="/chapter3/07-lensflares">07-lensflares</RouterLink>
     
   </div>
 </template>

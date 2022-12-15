@@ -12,8 +12,14 @@ import { GUI } from 'dat.gui'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import {
+  Lensflare,
+  LensflareElement
+} from 'three/examples/jsm/objects/Lensflare'
 
 import textureGrassImg from '@/assets/texture/grasslight-big.jpg?url'
+import textureFlare0 from '@/assets/texture/lensflare/lensflare0.png?url'
+import textureFlare3 from '@/assets/texture/lensflare/lensflare3.png?url'
 
 const { random, PI, floor, ceil, min, max, sin, cos, sqrt, abs } = Math
 
@@ -27,13 +33,11 @@ let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
-let hemiLight: THREE.HemisphereLight
-let hemiLightHelper: THREE.HemisphereLightHelper
-let dirLight: THREE.DirectionalLight
-let dirLightHelper: THREE.DirectionalLightHelper
 let plane: THREE.Mesh
 let cube: THREE.Mesh
 let sphere: THREE.Mesh
+let lensFlareLight: LensFlareLight
+let textureLoader: THREE.TextureLoader
 
 onMounted(() => {
   initGUI()
@@ -47,18 +51,10 @@ const controls = {
   rotationSpeed: 0.02,
   bouncingSpeed: 0.03,
 }
-// 半球光
-const lightParams = {
-  showHelper: true,
-  skyColor: 0x0984e3,
-  groundColor: 0x00b894,
-  intensity: 2,
-}
-// 平行光
-const dirLightParams = {
-  showHelper: true,
+
+const lightParams= {
   color: 0xffffff,
-  intensity: 2,
+  intensity: 1,
 }
 function initGUI() {
   let gui = new GUI({
@@ -68,41 +64,19 @@ function initGUI() {
   gui.domElement.style.cssText = 'position: fixed; top: 0; right: 0;'
   canvasCon.value?.appendChild(gui.domElement)
 
-  const folder1 = gui.addFolder('HemisphereLight')
-  folder1.open()
-  folder1.add(lightParams, 'showHelper').onChange((val) => {
-    hemiLightHelper.visible = val
+  gui.addColor(lightParams, 'color').onChange(val => {
+    lensFlareLight.spotLight.color.setHex(val)
+    lensFlareLight.spotLightHelper.update()
+    ;(lensFlareLight.lensflare.material as THREE.MeshBasicMaterial).color.setHex(val)
   })
-  folder1.addColor(lightParams, 'skyColor').onChange((val) => {
-    hemiLight.color.setHex(val)
-    hemiLightHelper.update()
-  })
-  folder1.addColor(lightParams, 'groundColor').onChange((val) => {
-    hemiLight.groundColor.setHex(val)
-    hemiLightHelper.update()
-  })
-  folder1.add(lightParams, 'intensity', 0, 4, 0.1).onChange((val) => {
-    hemiLight.intensity = val
-    hemiLightHelper.update()
-  })
-
-  const folder2 = gui.addFolder('dirLight')
-  folder2.open()
-  folder2.add(dirLightParams, 'showHelper').onChange((val) => {
-    dirLightHelper.visible = val
-  })
-  folder2.addColor(dirLightParams, 'color').onChange((val) => {
-    dirLight.color.setHex(val)
-    dirLightHelper.update()
-  })
-  folder2.add(dirLightParams, 'intensity', 0, 4, 0.1).onChange((val) => {
-    dirLight.intensity = val
-    dirLightHelper.update()
+  gui.add(lightParams, 'intensity',0, 2*lightParams.intensity,0.1).onChange(val=>{
+    lensFlareLight.spotLight.intensity = val
   })
 }
 
 function initMesh() {
-  const textureGrass = new THREE.TextureLoader().load(textureGrassImg)
+  textureLoader = new THREE.TextureLoader()
+  const textureGrass = textureLoader.load(textureGrassImg)
   textureGrass.wrapS = THREE.RepeatWrapping
   textureGrass.wrapT = THREE.RepeatWrapping
   textureGrass.repeat.set(4, 4)
@@ -115,14 +89,14 @@ function initMesh() {
   plane.rotation.x = -0.5 * PI
 
   const cubeGeo = new THREE.BoxGeometry(4, 4, 4)
-  const cubeMat = new THREE.MeshLambertMaterial({ color: 0xfdcb6e })
+  const cubeMat = new THREE.MeshLambertMaterial({ color: 0xd63031 })
   cube = new THREE.Mesh(cubeGeo, cubeMat)
   cube.castShadow = true
   cube.position.set(-10, 4, 0)
   scene.add(cube)
 
   const sphereGeo = new THREE.SphereGeometry(4)
-  const sphereMat = new THREE.MeshLambertMaterial({ color: 0xfdcb6e })
+  const sphereMat = new THREE.MeshLambertMaterial({ color: 0x0984e3 })
   sphere = new THREE.Mesh(sphereGeo, sphereMat)
   sphere.castShadow = true
   sphere.position.y = 2
@@ -130,36 +104,32 @@ function initMesh() {
 }
 
 function initLight() {
-  hemiLight = new THREE.HemisphereLight(
-    lightParams.skyColor,
-    lightParams.groundColor,
-    lightParams.intensity
-  )
-  // hemiLight.castShadow = true // 半球光是没有阴影的
-  hemiLight.position.set(0, 100, 0)
-  hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 100)
-  scene.add(hemiLight)
-  scene.add(hemiLightHelper)
+  lensFlareLight = new LensFlareLight(-30,30,-80)
+}
 
-  dirLight = new THREE.DirectionalLight(
-    dirLightParams.color,
-    dirLightParams.intensity
-  )
-  dirLight.position.set(0, 40, -100)
-  dirLight.castShadow = true
-  dirLight.target = plane
-  dirLight.shadow.camera.near = 0.1;
-  dirLight.shadow.camera.far = 200;
-  dirLight.shadow.camera.left = -50;
-  dirLight.shadow.camera.right = 50;
-  dirLight.shadow.camera.top = 50;
-  dirLight.shadow.camera.bottom = -50;
-  dirLight.shadow.mapSize.width = 2048;
-  dirLight.shadow.mapSize.height = 2048;
+class LensFlareLight {
+  spotLight: THREE.SpotLight
+  spotLightHelper: THREE.SpotLightHelper
+  lensflare: Lensflare
+  constructor (x: number, y: number, z: number) {
+    this.spotLight = new THREE.SpotLight(lightParams.color, lightParams.intensity)
+    this.spotLight.castShadow = true
+    this.spotLight.position.set(x,y,z)
+    this.spotLightHelper = new THREE.SpotLightHelper(this.spotLight)
 
-  dirLightHelper = new THREE.DirectionalLightHelper(dirLight, 100)
-  scene.add(dirLight)
-  scene.add(dirLightHelper)
+    const texture0 = textureLoader.load(textureFlare0)
+    const texture3 = textureLoader.load(textureFlare3)
+    this.lensflare = new Lensflare()
+    this.lensflare.addElement(new LensflareElement(texture0,700,0,new THREE.Color().setHex(0xffffff)))
+    this.lensflare.addElement(new LensflareElement(texture3, 60, 0.6))
+    this.lensflare.addElement(new LensflareElement(texture3, 70, 0.7))
+    this.lensflare.addElement(new LensflareElement(texture3, 120, 0.9))
+    this.lensflare.addElement(new LensflareElement(texture3, 70, 1))
+    this.spotLight.add(this.lensflare)
+
+    scene.add(this.spotLight)
+    scene.add(this.spotLightHelper)
+  }
 }
 
 let step = 0

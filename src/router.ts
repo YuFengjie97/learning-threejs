@@ -88,6 +88,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '06-area-light',
         component: ()=>import('@/views/chapter3/06-area-light.vue')
       },
+      {
+        path: '07-lensflares',
+        component: ()=>import('@/views/chapter3/07-lensflares.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },

@@ -147,9 +147,9 @@ function initMesh() {
 
 function initLight() {
   RectAreaLightUniformsLib.init()
-  const l1 = new AreaLight(light1Params, -12, 8, -20)
-  const l2 = new AreaLight(light2Params, 0, 8, -20)
-  const l3 = new AreaLight(light3Params, 12, 8, -20)
+  const l1 = new AreaLight(light1Params, -12, 8, 0)
+  const l2 = new AreaLight(light2Params, 0, 8, 0)
+  const l3 = new AreaLight(light3Params, 12, 8, 0)
   lights.push(...[l1, l2, l3])
 }
 
