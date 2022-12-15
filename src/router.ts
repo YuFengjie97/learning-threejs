@@ -76,6 +76,14 @@ const routes: Array<RouteRecordRaw> = [
         path: '03-spot-light',
         component: ()=>import('@/views/chapter3/03-spot-light.vue')
       },
+      {
+        path: '04-directional-light',
+        component: ()=>import('@/views/chapter3/04-directional-light.vue')
+      },
+      {
+        path: '05-hemisphere-light',
+        component: ()=>import('@/views/chapter3/05-hemisphere-light.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },
