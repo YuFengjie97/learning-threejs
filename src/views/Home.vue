@@ -21,6 +21,7 @@
     <RouterLink to="/chapter3/03-spot-light">03-spot-light</RouterLink>
     <RouterLink to="/chapter3/04-directional-light">04-directional-light</RouterLink>
     <RouterLink to="/chapter3/05-hemisphere-light">05-hemisphere-light</RouterLink>
+    <RouterLink to="/chapter3/06-area-light">06-area-light</RouterLink>
     
   </div>
 </template>
