@@ -29,7 +29,7 @@ let ground: THREE.Mesh
 let cube: THREE.Mesh
 let sphere: THREE.Mesh
 let plane: THREE.Mesh
-let meshMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0xe84393 }) // 全局材质，cube，sphere，plane共用材质
+let meshMaterial = new THREE.MeshPhongMaterial({color: 0xe84393})
 
 onMounted(() => {
   initGUI()
@@ -42,6 +42,9 @@ onMounted(() => {
 const mesh = {
   selectMesh: 'cube',
   color: 0xe84393,
+  emissive: 0x000000, //材质的放射（光）颜色，基本上是不受其他光照影响的固有颜色。默认为黑色。
+  specular: 0x111111, //材质的高光颜色。默认值为0x111111（深灰色）的颜色Color。
+  shininess: 30, // specular高亮的程度，越高的值越闪亮。默认值为 30。
   transparent: false,
   opacity: 1,
   side: 'front',
@@ -92,6 +95,17 @@ function initGUI() {
         ? THREE.BackSide
         : THREE.DoubleSide
   })
+  meshGui.addColor(mesh, 'emissive').onChange(val => {
+    meshMaterial.emissive.setHex(val)
+  })
+  meshGui.addColor(mesh, 'specular').onChange(val => {
+    meshMaterial.specular.setHex(val)
+  })
+  meshGui.add(mesh, 'shininess', 0, 200, 1).onChange(val => {
+    meshMaterial.shininess = val
+    meshMaterial.needsUpdate = true
+  })
+  
   const transparentGui = meshGui.addFolder('transparent')
   transparentGui.open()
   transparentGui.add(mesh, 'transparent').onChange((val) => {
@@ -103,7 +117,6 @@ function initGUI() {
     meshMaterial.needsUpdate = true
   })
   const wireframeGui = meshGui.addFolder('wireframe')
-  wireframeGui.open()
   wireframeGui.add(mesh, 'wireframe').onChange(val => {
     meshMaterial.wireframe = val
   })
@@ -138,7 +151,6 @@ function initMesh() {
   const cubeGeo = new THREE.BoxGeometry(14, 14, 14)
   const sphereGeo = new THREE.SphereGeometry(7)
   const planeGeo = new THREE.PlaneGeometry(14, 14)
-
   cube = new THREE.Mesh(cubeGeo, meshMaterial)
   sphere = new THREE.Mesh(sphereGeo, meshMaterial)
   plane = new THREE.Mesh(planeGeo, meshMaterial)

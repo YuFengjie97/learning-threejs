@@ -117,6 +117,15 @@ const routes: Array<RouteRecordRaw> = [
         path: '05-mesh-face-material',
         component: () => import('@/views/chapter4/05-mesh-face-material.vue')
       },
+      {
+        path: '06-mesh-lambert-material',
+        component: () => import('@/views/chapter4/06-mesh-lambert-material.vue')
+      },
+      {
+        path: '07-mesh-phong-material',
+        component: () => import('@/views/chapter4/07-mesh-phong-material.vue')
+      },
+      
     ]
   },
   { path: '/:path(.*)', component: NotFound },

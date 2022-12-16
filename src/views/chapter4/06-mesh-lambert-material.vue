@@ -7,6 +7,11 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * lambert材质的颜色是由自身color和emissive共同决定的，
+ * wrapRGB属性在ts中没有找到，估计是被弃用了
+ * wireframeLinewidth 由于OpenGL Core Profile与 大多数平台上WebGL渲染器的限制，无论如何设置该值，线宽始终为1。
+ */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
@@ -29,7 +34,7 @@ let ground: THREE.Mesh
 let cube: THREE.Mesh
 let sphere: THREE.Mesh
 let plane: THREE.Mesh
-let meshMaterial: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({ color: 0xe84393 }) // 全局材质，cube，sphere，plane共用材质
+let meshMaterial: THREE.MeshLambertMaterial = new THREE.MeshLambertMaterial({color: 0xe84393})
 
 onMounted(() => {
   initGUI()
@@ -42,6 +47,7 @@ onMounted(() => {
 const mesh = {
   selectMesh: 'cube',
   color: 0xe84393,
+  emissive: 0xffffff,
   transparent: false,
   opacity: 1,
   side: 'front',
@@ -92,6 +98,9 @@ function initGUI() {
         ? THREE.BackSide
         : THREE.DoubleSide
   })
+  meshGui.addColor(mesh, 'emissive').onChange(val => {
+    meshMaterial.emissive.setHex(val)
+  })
   const transparentGui = meshGui.addFolder('transparent')
   transparentGui.open()
   transparentGui.add(mesh, 'transparent').onChange((val) => {
@@ -103,7 +112,6 @@ function initGUI() {
     meshMaterial.needsUpdate = true
   })
   const wireframeGui = meshGui.addFolder('wireframe')
-  wireframeGui.open()
   wireframeGui.add(mesh, 'wireframe').onChange(val => {
     meshMaterial.wireframe = val
   })
@@ -138,7 +146,6 @@ function initMesh() {
   const cubeGeo = new THREE.BoxGeometry(14, 14, 14)
   const sphereGeo = new THREE.SphereGeometry(7)
   const planeGeo = new THREE.PlaneGeometry(14, 14)
-
   cube = new THREE.Mesh(cubeGeo, meshMaterial)
   sphere = new THREE.Mesh(sphereGeo, meshMaterial)
   plane = new THREE.Mesh(planeGeo, meshMaterial)
