@@ -26,6 +26,7 @@
 
     <h1>Chapter4</h1>
     <RouterLink to="/chapter4/01-basic-mesh-material">01-basic-mesh-material</RouterLink>
+    <RouterLink to="/chapter4/02-depth-material">02-depth-material</RouterLink>
     
   </div>
 </template>
