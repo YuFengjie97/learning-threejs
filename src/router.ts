@@ -94,6 +94,15 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+  {
+    path: '/chapter4/',
+    children: [
+      {
+        path: '01-basic-mesh-material',
+        component: () => import('@/views/chapter4/01-basic-mesh-material.vue')
+      }
+    ]
+  },
   { path: '/:path(.*)', component: NotFound },
 ]
 

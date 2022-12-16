@@ -23,6 +23,9 @@
     <RouterLink to="/chapter3/05-hemisphere-light">05-hemisphere-light</RouterLink>
     <RouterLink to="/chapter3/06-area-light">06-area-light</RouterLink>
     <RouterLink to="/chapter3/07-lensflares">07-lensflares</RouterLink>
+
+    <h1>Chapter4</h1>
+    <RouterLink to="/chapter4/01-basic-mesh-material">01-basic-mesh-material</RouterLink>
     
   </div>
 </template>
@@ -34,7 +37,7 @@ import { ref} from 'vue';
 
 <style lang='less' scoped>
 .home{
-  padding: 1rem 10rem;
+  padding: 1rem 10rem 2rem 10rem;
   display: flex;
   flex-flow: column nowrap;
   @media screen and (max-width: 576px) {
