@@ -29,6 +29,7 @@
     <RouterLink to="/chapter4/02-depth-material">02-depth-material</RouterLink>
     <RouterLink to="/chapter4/03-combined-material">03-combined-material</RouterLink>
     <RouterLink to="/chapter4/04-mesh-normal-material">04-mesh-normal-material</RouterLink>
+    <RouterLink to="/chapter4/05-mesh-face-material">05-mesh-face-material</RouterLink>
     
   </div>
 </template>
