@@ -105,7 +105,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '02-depth-material',
         component: () => import('@/views/chapter4/02-depth-material.vue')
       },
-      
+      {
+        path: '03-combined-material',
+        component: () => import('@/views/chapter4/03-combined-material.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },
