@@ -137,7 +137,11 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '01-basic-2d-geometries-plane',
         component: () => import('@/views/chapter5/01-basic-2d-geometries-plane.vue')
-      }
+      },
+      {
+        path: '02-basic-2d-geometries-circle',
+        component: () => import('@/views/chapter5/02-basic-2d-geometries-circle.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },
