@@ -34,6 +34,8 @@
     <RouterLink to="/chapter4/07-mesh-phong-material">07-mesh-phong-material</RouterLink>
     <RouterLink to="/chapter4/08-shader-material">08-shader-material</RouterLink>
     
+    <h1>Chapter5</h1>
+    <RouterLink to="/chapter5/01-basic-2d-geometries-plane">01-basic-2d-geometries-plane</RouterLink>
   </div>
 </template>
 
