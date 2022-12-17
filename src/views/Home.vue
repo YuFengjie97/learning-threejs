@@ -32,6 +32,7 @@
     <RouterLink to="/chapter4/05-mesh-face-material">05-mesh-face-material</RouterLink>
     <RouterLink to="/chapter4/06-mesh-lambert-material">06-mesh-lambert-material</RouterLink>
     <RouterLink to="/chapter4/07-mesh-phong-material">07-mesh-phong-material</RouterLink>
+    <RouterLink to="/chapter4/08-shader-material">08-shader-material</RouterLink>
     
   </div>
 </template>
