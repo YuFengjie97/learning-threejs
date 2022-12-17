@@ -37,6 +37,8 @@
     <h1>Chapter5</h1>
     <RouterLink to="/chapter5/01-basic-2d-geometries-plane">01-basic-2d-geometries-plane</RouterLink>
     <RouterLink to="/chapter5/02-basic-2d-geometries-circle">02-basic-2d-geometries-circle</RouterLink>
+    <RouterLink to="/chapter5/03-basic-2d-geometries-shape">03-basic-2d-geometries-shape</RouterLink>
+    
     
   </div>
 </template>
