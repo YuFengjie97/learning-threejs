@@ -150,6 +150,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '04-basic-3d-geometries-cube',
         component: () => import('@/views/chapter5/04-basic-3d-geometries-cube.vue')
       },
+      {
+        path: '05-basic-3d-geometries-sphere',
+        component: () => import('@/views/chapter5/05-basic-3d-geometries-sphere.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },
