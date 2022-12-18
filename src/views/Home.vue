@@ -44,6 +44,7 @@
     <RouterLink to="/chapter5/07-basic-3d-geometries-torus">07-basic-3d-geometries-torus</RouterLink>
     <RouterLink to="/chapter5/08-basic-3d-geometries-ring">08-basic-3d-geometries-ring</RouterLink>
     <RouterLink to="/chapter5/09-basic-3d-geometries-torus-knot">09-basic-3d-geometries-torus-knot</RouterLink>
+    <RouterLink to="/chapter5/010-basic-3d-geometries-polyhedron">010-basic-3d-geometries-polyhedron</RouterLink>
     
     
   </div>
