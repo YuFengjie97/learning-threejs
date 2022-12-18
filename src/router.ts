@@ -176,6 +176,15 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+  {
+    path: '/chapter6/',
+    children: [
+      {
+        path: '01-advanced-3d-geometries-convex',
+        component: () => import('@/views/chapter6/01-advanced-3d-geometries-convex.vue')
+      }
+    ]
+  },
   { path: '/:path(.*)', component: NotFound },
 ]
 
