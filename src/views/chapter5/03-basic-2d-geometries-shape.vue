@@ -48,6 +48,7 @@ let smileyShape: THREE.Shape
 let shapeMesh: THREE.Group
 let shapeLine: THREE.Line
 const points = new Float32Array(408)
+let shapeGroup: THREE.Group
 
 onMounted(() => {
   initTHREE()
@@ -57,7 +58,7 @@ onMounted(() => {
 })
 
 const params = {
-  rotateSpeed: 0,
+  rotateSpeed: 0.01,
   showShape: true,
   divisions: 10, //通过shape取点的精度
 }
@@ -82,10 +83,14 @@ function initGUI() {
 
 let step = 0
 function animate() {
-  shapeMesh.rotation.y = step+=params.rotateSpeed
-  shapeLine.rotation.y = step+=params.rotateSpeed
+  shapeGroup.rotation.y = step+=params.rotateSpeed
+  // shapeLine.rotation.y = step+=params.rotateSpeed
 }
 function initMesh() {
+  shapeGroup = new THREE.Group()
+  shapeGroup.rotation.z = PI
+  scene.add(shapeGroup)
+
   smileyShape = initSmileyShape()
   shapeMesh = initShpaeMesh(smileyShape)
   shapeLine = initShapeLine(smileyShape)
@@ -99,8 +104,11 @@ function initShpaeMesh(s: THREE.Shape) {
     wireframe: true,
   })
   const mesh = createMultiMaterialObject(geo, [matBasic, matNormal])
-  mesh.scale.set(scale, scale, scale)
-  scene.add(mesh)
+  mesh.scale.multiplyScalar(scale)
+  
+  setCenter(mesh)
+  shapeGroup.add(mesh)
+
   return mesh
 }
 function initShapeLine(s: THREE.Shape) {
@@ -112,10 +120,20 @@ function initShapeLine(s: THREE.Shape) {
   )
   const lineMat = new THREE.LineBasicMaterial({ color: 0xff3333 })
   const line = new THREE.Line(geo, lineMat)
-  line.scale.set(scale, scale, scale)
-  scene.add(line)
+  line.scale.multiplyScalar(scale)
+
+  setCenter(line)
+  shapeGroup.add(line)
+
   line.visible = false
   return line
+}
+
+// 设置mesh几何中心点
+function setCenter(obj: THREE.Object3D){
+  const box = new THREE.Box3().setFromObject(obj)
+  box.getCenter(obj.position)
+  obj.position.multiplyScalar(-1)
 }
 
 // 获取一个shape上的形状边缘与孔洞的所有点,并将更新points
