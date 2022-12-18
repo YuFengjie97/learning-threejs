@@ -25,7 +25,7 @@ let orbitControls: OrbitControls
 let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
-let torus: THREE.Group
+let ring: THREE.Group
 
 onMounted(() => {
   initTHREE()
@@ -35,11 +35,12 @@ onMounted(() => {
 })
 
 const params = {
-  radius: 10,
-  tube:10,
-  radiusSegments:8,
-  tubularSegments:6,
-  arc: PI*2,
+  innerRadius:10,
+  outerRadius:30,
+  thetaSegments:8,
+  phiSegments:8,
+  thetaStart: 0,
+  thetaLength: PI * 2,
 }
 function initGUI() {
   let gui = new GUI({
@@ -49,39 +50,42 @@ function initGUI() {
   gui.domElement.style.cssText = 'position: fixed; top: 0; right: 0;'
   canvasCon.value?.appendChild(gui.domElement)
 
-  gui.add(params,'radius',0,40,1).onChange(()=>redraw())
-  gui.add(params,'tube',0,40,1).onChange(()=>redraw())
-  gui.add(params,'radiusSegments',0,40,1).onChange(()=>redraw())
-  gui.add(params,'tubularSegments',0,40,1).onChange(()=>redraw())
-  gui.add(params,'arc',0,PI*2,0.01).onChange(()=>redraw())
+  gui.add(params,'innerRadius',0,40,1).onChange(()=>redraw())
+  gui.add(params,'outerRadius',0,40,1).onChange(()=>redraw())
+  gui.add(params,'thetaSegments',0,40,1).onChange(()=>redraw())
+  gui.add(params,'phiSegments',0,40,1).onChange(()=>redraw())
+  gui.add(params,'thetaStart',0,PI*2,0.01).onChange(()=>redraw())
+  gui.add(params,'thetaLength',0,PI*2,0.01).onChange(()=>redraw())
 }
 
 let step = 0
 function animate() {
-  torus.rotation.y = step += 0.01
+  ring.rotation.y = step += 0.01
 }
 function createMesh() {
   const {
-    radius,
-    tube,
-    radiusSegments,
-    tubularSegments,
-    arc,
+    innerRadius,
+    outerRadius,
+    thetaSegments,
+    phiSegments,
+    thetaStart,
+    thetaLength,
   } = params
-  const geo = new THREE.TorusGeometry(
-    radius,
-    tube,
-    radiusSegments,
-    tubularSegments,
-    arc,
+  const geo = new THREE.RingGeometry(
+    innerRadius,
+    outerRadius,
+    thetaSegments,
+    phiSegments,
+    thetaStart,
+    thetaLength,
   )
-  const matNormal = new THREE.MeshNormalMaterial()
+  const matNormal = new THREE.MeshNormalMaterial({side: THREE.DoubleSide})
   const matBasic = new THREE.MeshBasicMaterial({ wireframe: true })
-  torus = createMultiMaterialObject(geo, [matNormal, matBasic])
-  scene.add(torus)
+  ring = createMultiMaterialObject(geo, [matNormal, matBasic])
+  scene.add(ring)
 }
 function redraw() {
-  scene.remove(torus)
+  scene.remove(ring)
   createMesh()
 }
 

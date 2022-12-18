@@ -7,24 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-/**
- * 跟原来的例子不同
- * 我是，在一开始就在场景里添加了shapeMesh和shapeLine
- * shapeMesh使用createMultiMaterialObject使用多个材质展示，返回的是group
- *
- * shapeLine是THREE.line,首先通过shape.extractPoints获取该shape的形状边缘和空洞边缘的所有点
- * shapeLine的geo使用的是bufferGeo，对应的数据数组是Float32Array格式，使用了缓存机制来更新点坐标
- *
- * const geo = new THREE.BufferGeometry().setAttribute(
- *   'position',
- *  new THREE.BufferAttribute(points, 2)
- * )通过这种形式，为geo设置position属性，并以二元组的形式来解析points
- *
- * 我是预先计算了笑脸形状在精度为20（gui控制里的最大精度）时的点的数量，因为Float32Array在初始化时，需要确定长度
- * updatePoints重新以精度来获取点坐标更新points，如果新的点长度比原来短，要把points用不到的点坐标置为0
- * 然后通过shapeLine.geometry.attributes.position.needsUpdate = true告知渲染器，该mesh的几何属性position需要更新
- *
- */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
