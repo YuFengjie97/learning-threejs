@@ -43,7 +43,7 @@ let orbitControls: OrbitControls
 let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
-let sphere: THREE.Group
+let cylinder: THREE.Group
 
 onMounted(() => {
   initTHREE()
@@ -53,13 +53,14 @@ onMounted(() => {
 })
 
 const params = {
-  radius: 4,
-  widthSegments: 10,
-  heightSegments: 10,
-  phiStart: 0,
-  phiLength: PI*2,
-  thetaStart: 0,
-  thetaLength: PI,
+  radiusTop:20,
+  radiusBottom:20,
+  height:20,
+  radiusSegments:8,
+  heightSegments:8,
+  openEnded:false,
+  thetaStart:0,
+  thetaLength: PI*2,
 }
 function initGUI() {
   let gui = new GUI({
@@ -68,45 +69,49 @@ function initGUI() {
   })
   gui.domElement.style.cssText = 'position: fixed; top: 0; right: 0;'
   canvasCon.value?.appendChild(gui.domElement)
-  gui.add(params, 'radius', 0, 40, 0.1).onChange(redraw)
-  gui.add(params, 'widthSegments', 0, 20, 1).onChange(redraw)
-  gui.add(params, 'heightSegments', 0, 20, 1).onChange(redraw)
-  gui.add(params, 'phiStart', 0, PI * 2, 0.01).onChange(redraw)
-  gui.add(params, 'phiLength', 0, PI * 2, 0.01).onChange(redraw)
-  gui.add(params, 'thetaStart', 0, PI * 2, 0.01).onChange(redraw)
-  gui.add(params, 'thetaLength', 0, PI * 2, 0.01).onChange(redraw)
+
+  gui.add(params,'radiusTop',0,40,1).onChange(()=>redraw())
+  gui.add(params,'radiusBottom',0,40,1).onChange(()=>redraw())
+  gui.add(params,'height',0,40,1).onChange(()=>redraw())
+  gui.add(params,'radiusSegments',0,40,1).onChange(()=>redraw())
+  gui.add(params,'heightSegments',0,40,1).onChange(()=>redraw())
+  gui.add(params,'openEnded').onChange(()=>redraw())
+  gui.add(params,'thetaStart',0,PI*2,0.01).onChange(()=>redraw())
+  gui.add(params,'thetaLength',0,PI*2,0.01).onChange(()=>redraw())
 }
 
 let step = 0
 function animate() {
-  sphere.rotation.y = step += 0.01
+  cylinder.rotation.y = step += 0.01
 }
 function createMesh() {
   const {
-    radius,
-    widthSegments,
+    radiusTop,
+    radiusBottom,
+    height,
+    radiusSegments,
     heightSegments,
-    phiStart,
-    phiLength,
+    openEnded,
     thetaStart,
     thetaLength,
   } = params
-  const geo = new THREE.SphereGeometry(
-    radius,
-    widthSegments,
+  const geo = new THREE.CylinderGeometry(
+    radiusTop,
+    radiusBottom,
+    height,
+    radiusSegments,
     heightSegments,
-    phiStart,
-    phiLength,
+    openEnded,
     thetaStart,
-    thetaLength
+    thetaLength,
   )
   const matNormal = new THREE.MeshNormalMaterial()
   const matBasic = new THREE.MeshBasicMaterial({ wireframe: true })
-  sphere = createMultiMaterialObject(geo, [matNormal, matBasic])
-  scene.add(sphere)
+  cylinder = createMultiMaterialObject(geo, [matNormal, matBasic])
+  scene.add(cylinder)
 }
 function redraw() {
-  scene.remove(sphere)
+  scene.remove(cylinder)
   createMesh()
 }
 
@@ -137,7 +142,7 @@ function initTHREE() {
   // 轨道控制器
   orbitControls = new OrbitControls(camera, renderer.domElement)
   orbitControls.target = new THREE.Vector3(0, 0, 0)
-  orbitControls.object.position.set(0, 3, 20)
+  orbitControls.object.position.set(0, 30, 50)
   orbitControls.update()
 }
 // 绘制
