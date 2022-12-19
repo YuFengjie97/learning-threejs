@@ -50,6 +50,7 @@
     <RouterLink to="/chapter6/01-advanced-3d-geometries-convex">01-advanced-3d-geometries-convex</RouterLink>
     <RouterLink to="/chapter6/02-advanced-3d-geometries-lathe">02-advanced-3d-geometries-lathe</RouterLink>
     <RouterLink to="/chapter6/02-advanced-3d-geometries-lathe-2">02-advanced-3d-geometries-lathe-2</RouterLink>
+    <RouterLink to="/chapter6/03-extrude-geometry">03-extrude-geometry</RouterLink>
 
     
   </div>

@@ -191,6 +191,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '02-advanced-3d-geometries-lathe-2',
         component: () => import('@/views/chapter6/02-advanced-3d-geometries-lathe-2.vue')
       },
+      {
+        path: '03-extrude-geometry',
+        component: () => import('@/views/chapter6/03-extrude-geometry.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },

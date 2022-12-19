@@ -79,7 +79,6 @@ function animate() {
   mesh.rotation.y = step += 0.005
 }
 function initMesh() {
-  if (mesh) scene.remove(mesh)
   mesh = new THREE.Group()
   scene.add(mesh)
 
