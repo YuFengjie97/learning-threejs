@@ -195,6 +195,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '03-extrude-geometry',
         component: () => import('@/views/chapter6/03-extrude-geometry.vue')
       },
+      {
+        path: '04-extrude-tube',
+        component: () => import('@/views/chapter6/04-extrude-tube.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },
