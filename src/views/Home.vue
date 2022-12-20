@@ -52,6 +52,7 @@
     <RouterLink to="/chapter6/02-advanced-3d-geometries-lathe-2">02-advanced-3d-geometries-lathe-2</RouterLink>
     <RouterLink to="/chapter6/03-extrude-geometry">03-extrude-geometry</RouterLink>
     <RouterLink to="/chapter6/04-extrude-tube">04-extrude-tube</RouterLink>
+    <RouterLink to="/chapter6/05-extrude-svg">05-extrude-svg</RouterLink>
 
     
   </div>

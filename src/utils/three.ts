@@ -73,3 +73,4 @@ export class CustomCurve extends THREE.Curve<THREE.Vector3> {
     return vector
   }
 }
+
