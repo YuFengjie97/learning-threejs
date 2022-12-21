@@ -240,6 +240,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '01-particles',
         component: () => import('@/views/chapter7/01-particles.vue'),
       },
+      {
+        path: '02-particles-webgl',
+        component: () => import('@/views/chapter7/02-particles-webgl.vue'),
+      },
+      
     ],
   },
   { path: '/:path(.*)', component: NotFound },
