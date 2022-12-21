@@ -244,6 +244,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '02-particles-webgl',
         component: () => import('@/views/chapter7/02-particles-webgl.vue'),
       },
+      {
+        path: '03-basic-point-cloud',
+        component: () => import('@/views/chapter7/03-basic-point-cloud.vue'),
+      },
       
     ],
   },

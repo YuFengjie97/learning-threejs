@@ -60,6 +60,7 @@
     <h1>Chapter7</h1>
     <RouterLink to="/chapter7/01-particles">01-particles</RouterLink>
     <RouterLink to="/chapter7/02-particles-webgl">02-particles-webgl</RouterLink>
+    <RouterLink to="/chapter7/03-basic-point-cloud">03-basic-point-cloud</RouterLink>
     
   </div>
 </template>
