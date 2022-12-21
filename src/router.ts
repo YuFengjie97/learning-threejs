@@ -211,6 +211,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '07-text-geometry',
         component: () => import('@/views/chapter6/07-text-geometry.vue')
       },
+      {
+        path: '08-binary-operations',
+        component: () => import('@/views/chapter6/08-binary-operations.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },

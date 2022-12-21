@@ -55,8 +55,8 @@
     <RouterLink to="/chapter6/05-extrude-svg">05-extrude-svg</RouterLink>
     <RouterLink to="/chapter6/06-parametric-geometries">06-parametric-geometries</RouterLink>
     <RouterLink to="/chapter6/07-text-geometry">07-text-geometry</RouterLink>
+    <RouterLink to="/chapter6/08-binary-operations">08-binary-operations</RouterLink>
 
-    
   </div>
 </template>
 
