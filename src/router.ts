@@ -203,6 +203,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '05-extrude-svg',
         component: () => import('@/views/chapter6/05-extrude-svg.vue')
       },
+      {
+        path: '06-parametric-geometries',
+        component: () => import('@/views/chapter6/06-parametric-geometries.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },

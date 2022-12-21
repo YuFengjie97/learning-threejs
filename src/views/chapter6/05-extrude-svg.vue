@@ -7,10 +7,6 @@
 </template>
 
 <script lang="ts" setup>
-/**
- * 我感觉动态的修改mesh的geometry很麻烦
- * 还是原来remove掉，重新创建geo，mesh比较方便
- */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
