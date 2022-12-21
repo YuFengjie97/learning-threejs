@@ -54,6 +54,7 @@
     <RouterLink to="/chapter6/04-extrude-tube">04-extrude-tube</RouterLink>
     <RouterLink to="/chapter6/05-extrude-svg">05-extrude-svg</RouterLink>
     <RouterLink to="/chapter6/06-parametric-geometries">06-parametric-geometries</RouterLink>
+    <RouterLink to="/chapter6/07-text-geometry">07-text-geometry</RouterLink>
 
     
   </div>

@@ -207,6 +207,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '06-parametric-geometries',
         component: () => import('@/views/chapter6/06-parametric-geometries.vue')
       },
+      {
+        path: '07-text-geometry',
+        component: () => import('@/views/chapter6/07-text-geometry.vue')
+      },
     ]
   },
   { path: '/:path(.*)', component: NotFound },

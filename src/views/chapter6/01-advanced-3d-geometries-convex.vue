@@ -10,6 +10,7 @@
 /**
  * 原来的例子，每个点是使用SphereGeometry。
  * 现在改为使用bufferGeometry来初始化geo，然后使用Points显示点，因为Points默认是矩形来展示点，需要通过导入图片贴图来替换
+ * textureloader.load是同步的,竟然
  */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
