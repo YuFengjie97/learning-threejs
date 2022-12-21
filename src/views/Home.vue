@@ -57,6 +57,9 @@
     <RouterLink to="/chapter6/07-text-geometry">07-text-geometry</RouterLink>
     <RouterLink to="/chapter6/08-binary-operations">08-binary-operations</RouterLink>
 
+    <h1>Chapter7</h1>
+    <RouterLink to="/chapter7/01-particles">01-particles</RouterLink>
+    
   </div>
 </template>
 
