@@ -248,7 +248,18 @@ const routes: Array<RouteRecordRaw> = [
         path: '03-basic-point-cloud',
         component: () => import('@/views/chapter7/03-basic-point-cloud.vue'),
       },
-      
+      {
+        path: '05a-program-based-point-cloud-webgl',
+        component: () => import('@/views/chapter7/05a-program-based-point-cloud-webgl.vue'),
+      },
+      {
+        path: '05b-program-based-sprites-webgl',
+        component: () => import('@/views/chapter7/05b-program-based-sprites-webgl.vue'),
+      },
+      {
+        path: '05c-webgl-points-sprites',
+        component: () => import('@/views/chapter7/05c-webgl-points-sprites.vue'),
+      },
     ],
   },
   { path: '/:path(.*)', component: NotFound },
