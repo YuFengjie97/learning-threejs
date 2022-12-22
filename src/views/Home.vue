@@ -65,6 +65,7 @@
     <RouterLink to="/chapter7/05b-program-based-sprites-webgl">05b-program-based-sprites-webgl</RouterLink>
     <RouterLink to="/chapter7/06-rainy-scene">06-rainy-scene</RouterLink>
     <RouterLink to="/chapter7/07-snowy-scene">07-snowy-scene</RouterLink>
+    <RouterLink to="/chapter7/08-sprites">08-sprites</RouterLink>
     
   </div>
 </template>

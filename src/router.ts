@@ -264,6 +264,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '07-snowy-scene',
         component: () => import('@/views/chapter7/07-snowy-scene.vue'),
       },
+      {
+        path: '08-sprites',
+        component: () => import('@/views/chapter7/08-sprites.vue'),
+      },
     ],
   },
   { path: '/:path(.*)', component: NotFound },
