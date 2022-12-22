@@ -66,6 +66,7 @@
     <RouterLink to="/chapter7/06-rainy-scene">06-rainy-scene</RouterLink>
     <RouterLink to="/chapter7/07-snowy-scene">07-snowy-scene</RouterLink>
     <RouterLink to="/chapter7/08-sprites">08-sprites</RouterLink>
+    <RouterLink to="/chapter7/09-sprites-3D">09-sprites-3D</RouterLink>
     
   </div>
 </template>

@@ -268,6 +268,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '08-sprites',
         component: () => import('@/views/chapter7/08-sprites.vue'),
       },
+      {
+        path: '09-sprites-3D',
+        component: () => import('@/views/chapter7/09-sprites-3D.vue'),
+      },
     ],
   },
   { path: '/:path(.*)', component: NotFound },
