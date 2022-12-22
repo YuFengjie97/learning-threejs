@@ -63,8 +63,8 @@
     <RouterLink to="/chapter7/03-basic-point-cloud">03-basic-point-cloud</RouterLink>
     <RouterLink to="/chapter7/05a-program-based-point-cloud-webgl">05a-program-based-point-cloud-webgl</RouterLink>
     <RouterLink to="/chapter7/05b-program-based-sprites-webgl">05b-program-based-sprites-webgl</RouterLink>
-    <RouterLink to="/chapter7/05c-webgl-points-sprites">05c-webgl-points-sprites</RouterLink>
     <RouterLink to="/chapter7/06-rainy-scene">06-rainy-scene</RouterLink>
+    <RouterLink to="/chapter7/07-snowy-scene">07-snowy-scene</RouterLink>
     
   </div>
 </template>

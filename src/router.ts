@@ -257,12 +257,12 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/chapter7/05b-program-based-sprites-webgl.vue'),
       },
       {
-        path: '05c-webgl-points-sprites',
-        component: () => import('@/views/chapter7/05c-webgl-points-sprites.vue'),
-      },
-      {
         path: '06-rainy-scene',
         component: () => import('@/views/chapter7/06-rainy-scene.vue'),
+      },
+      {
+        path: '07-snowy-scene',
+        component: () => import('@/views/chapter7/07-snowy-scene.vue'),
       },
     ],
   },
