@@ -260,6 +260,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '05c-webgl-points-sprites',
         component: () => import('@/views/chapter7/05c-webgl-points-sprites.vue'),
       },
+      {
+        path: '06-rainy-scene',
+        component: () => import('@/views/chapter7/06-rainy-scene.vue'),
+      },
     ],
   },
   { path: '/:path(.*)', component: NotFound },
