@@ -286,7 +286,13 @@ const routes: Array<RouteRecordRaw> = [
     children:[{
       path: '01-grouping',
       component:()=>import('@/views/chapter8/01-grouping.vue')
-    }]
+    },
+    {
+      path: '03-load-save-json-object',
+      component:()=>import('@/views/chapter8/03-load-save-json-object.vue')
+    }
+    
+  ]
   },
   { path: '/:path(.*)', component: NotFound },
 ]

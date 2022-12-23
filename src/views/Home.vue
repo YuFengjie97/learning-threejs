@@ -71,6 +71,7 @@
     
     <h1>Chapter8</h1>
     <RouterLink to="/chapter8/01-grouping">01-grouping</RouterLink>
+    <RouterLink to="/chapter8/03-load-save-json-object">03-load-save-json-object</RouterLink>
 
   </div>
 </template>
