@@ -73,6 +73,7 @@
     <RouterLink to="/chapter8/01-grouping">01-grouping</RouterLink>
     <RouterLink to="/chapter8/03-load-save-json-object">03-load-save-json-object</RouterLink>
     <RouterLink to="/chapter8/04-load-save-json-scene">04-load-save-json-scene</RouterLink>
+    <RouterLink to="/chapter8/05-blender-from-json">05-blender-from-json</RouterLink>
     
   </div>
 </template>

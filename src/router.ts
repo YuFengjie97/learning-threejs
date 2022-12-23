@@ -294,8 +294,11 @@ const routes: Array<RouteRecordRaw> = [
     {
       path: '04-load-save-json-scene',
       component:()=>import('@/views/chapter8/04-load-save-json-scene.vue')
-    }
-    
+    },
+    {
+      path: '05-blender-from-json',
+      component:()=>import('@/views/chapter8/05-blender-from-json.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },
