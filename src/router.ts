@@ -250,11 +250,13 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '05a-program-based-point-cloud-webgl',
-        component: () => import('@/views/chapter7/05a-program-based-point-cloud-webgl.vue'),
+        component: () =>
+          import('@/views/chapter7/05a-program-based-point-cloud-webgl.vue'),
       },
       {
         path: '05b-program-based-sprites-webgl',
-        component: () => import('@/views/chapter7/05b-program-based-sprites-webgl.vue'),
+        component: () =>
+          import('@/views/chapter7/05b-program-based-sprites-webgl.vue'),
       },
       {
         path: '06-rainy-scene',
@@ -271,6 +273,11 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '09-sprites-3D',
         component: () => import('@/views/chapter7/09-sprites-3D.vue'),
+      },
+      {
+        path: '10-create-particle-system-from-model',
+        component: () =>
+          import('@/views/chapter7/10-create-particle-system-from-model.vue'),
       },
     ],
   },

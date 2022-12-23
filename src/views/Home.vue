@@ -67,6 +67,7 @@
     <RouterLink to="/chapter7/07-snowy-scene">07-snowy-scene</RouterLink>
     <RouterLink to="/chapter7/08-sprites">08-sprites</RouterLink>
     <RouterLink to="/chapter7/09-sprites-3D">09-sprites-3D</RouterLink>
+    <RouterLink to="/chapter7/10-create-particle-system-from-model">10-create-particle-system-from-model</RouterLink>
     
   </div>
 </template>
