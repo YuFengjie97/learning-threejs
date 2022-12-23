@@ -290,6 +290,10 @@ const routes: Array<RouteRecordRaw> = [
     {
       path: '03-load-save-json-object',
       component:()=>import('@/views/chapter8/03-load-save-json-object.vue')
+    },
+    {
+      path: '04-load-save-json-scene',
+      component:()=>import('@/views/chapter8/04-load-save-json-scene.vue')
     }
     
   ]
