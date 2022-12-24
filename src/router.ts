@@ -307,6 +307,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '07-load-obj-mtl',
       component:()=>import('@/views/chapter8/07-load-obj-mtl.vue')
     },
+    {
+      path: '08-load-collada',
+      component:()=>import('@/views/chapter8/08-load-collada.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },

@@ -76,6 +76,7 @@
     <RouterLink to="/chapter8/05-blender-from-json">05-blender-from-json</RouterLink>
     <RouterLink to="/chapter8/06-load-obj">06-load-obj</RouterLink>
     <RouterLink to="/chapter8/07-load-obj-mtl">07-load-obj-mtl</RouterLink>
+    <RouterLink to="/chapter8/08-load-collada">08-load-collada</RouterLink>
     
   </div>
 </template>

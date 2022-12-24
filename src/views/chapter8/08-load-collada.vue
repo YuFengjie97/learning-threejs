@@ -8,20 +8,16 @@
 
 <script lang="ts" setup>
 /**
- * mtl文件加载
- * obj文件是模型，也就是Object3D,如果模型比较简单，可能只是个mesh，复杂点就是个Group
- * mtl文件是材质，有些在加载后重新设置材质属性，不然在场景中不可见
+ * collada加载后的，需要通过其scene属性添加模型，模型类型是个THREE.Scene
  */
 import { ref, onMounted } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import butterflyObj from '@/assets/models/butterfly/butterfly.obj?url'
-import butterflyMtl from '@/assets/models/butterfly/butterfly.mtl?url'
 
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
-import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader'
+import elfUrl from '@/assets/models/elf/elf.dae?url'
+import { Collada,ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader'
 
 const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
@@ -35,9 +31,9 @@ let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
-let model: THREE.Object3D
+let model: THREE.Scene
 
-onMounted(async () => {
+onMounted(async() => {
   initGUI()
   initTHREE()
   initLight()
@@ -56,41 +52,27 @@ function initGUI() {
 }
 
 function animate() {
-  model.rotation.y += 0.01
+  model.rotation.z += 0.01
 }
 
-const mtlLoader = new MTLLoader()
-const objLoader = new OBJLoader()
-function modelLoad(mtlUrl: string, objUrl: string): Promise<THREE.Object3D> {
-  return new Promise((resolve, reject) => {
-    mtlLoader.load(mtlUrl, function (mats) {
-      objLoader.setMaterials(mats).load(objUrl, resolve)
+const loader = new ColladaLoader()
+function modelLoad(daeUrl: string): Promise<THREE.Scene>{
+  return new Promise((resolve, reject)=>{
+    loader.load(daeUrl, function(collada: Collada){
+      resolve(collada.scene)
     })
   })
 }
 
-async function initMesh() {
-  model = await modelLoad(butterflyMtl, butterflyObj)
-  // model模型的部分材质需要特殊处理
-  const wing1 = model.children[4]
-  const wing2 = model.children[5]
-  const mat1 = (wing1 as THREE.Mesh).material as THREE.MeshPhongMaterial
-  const mat2 = (wing2 as THREE.Mesh).material as THREE.MeshPhongMaterial
-  mat1.opacity = 0.6
-  mat1.transparent = true
-  mat1.depthTest = false
-  mat1.side = THREE.DoubleSide
-  mat2.opacity = 0.6
-  mat2.depthTest = false
-  mat2.transparent = true
-  mat2.side = THREE.DoubleSide
-  model.position.set(0, 40, 0)
-  model.scale.multiplyScalar(100)
+async function initMesh(){
+  model = await modelLoad(elfUrl)
+  model.scale.multiplyScalar(5)
+  model.position.y = 20
   scene.add(model)
 }
 function initLight() {
-  const light = new THREE.PointLight(0xffffff, 3)
-  light.position.set(-10, 50, 0)
+  const light = new THREE.PointLight(0xffffff, 2)
+  light.position.set(10,50,10)
   scene.add(light)
 }
 // three初始化
