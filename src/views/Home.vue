@@ -77,6 +77,7 @@
     <RouterLink to="/chapter8/06-load-obj">06-load-obj</RouterLink>
     <RouterLink to="/chapter8/07-load-obj-mtl">07-load-obj-mtl</RouterLink>
     <RouterLink to="/chapter8/08-load-collada">08-load-collada</RouterLink>
+    <RouterLink to="/chapter8/09-load-stl">09-load-stl</RouterLink>
     
   </div>
 </template>
