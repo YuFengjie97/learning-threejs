@@ -299,6 +299,14 @@ const routes: Array<RouteRecordRaw> = [
       path: '05-blender-from-json',
       component:()=>import('@/views/chapter8/05-blender-from-json.vue')
     },
+    {
+      path: '06-load-obj',
+      component:()=>import('@/views/chapter8/06-load-obj.vue')
+    },
+    {
+      path: '07-load-obj-mtl',
+      component:()=>import('@/views/chapter8/07-load-obj-mtl.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },
