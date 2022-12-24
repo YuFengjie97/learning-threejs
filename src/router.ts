@@ -315,6 +315,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '09-load-stl',
       component:()=>import('@/views/chapter8/09-load-stl.vue')
     },
+    {
+      path: '11-load-vtk',
+      component:()=>import('@/views/chapter8/11-load-vtk.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },
