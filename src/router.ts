@@ -319,6 +319,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '11-load-vtk',
       component:()=>import('@/views/chapter8/11-load-vtk.vue')
     },
+    {
+      path: '12-load-pdb',
+      component:()=>import('@/views/chapter8/12-load-pdb.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },

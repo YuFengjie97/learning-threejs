@@ -79,6 +79,7 @@
     <RouterLink to="/chapter8/08-load-collada">08-load-collada</RouterLink>
     <RouterLink to="/chapter8/09-load-stl">09-load-stl</RouterLink>
     <RouterLink to="/chapter8/11-load-vtk">11-load-vtk</RouterLink>
+    <RouterLink to="/chapter8/12-load-pdb">12-load-pdb</RouterLink>
     
   </div>
 </template>
