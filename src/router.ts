@@ -333,6 +333,12 @@ const routes: Array<RouteRecordRaw> = [
     },
   ]
   },
+  {
+    path: '/chapter9/',
+    children:[
+      {path: '01-basic-animation', component: ()=>import('@/views/chapter9/01-basic-animation.vue')}
+    ]
+  },
   { path: '/:path(.*)', component: NotFound },
 ]
 

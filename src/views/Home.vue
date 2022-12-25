@@ -83,6 +83,10 @@
     <RouterLink to="/chapter8/13-load-ply">13-load-ply</RouterLink>
     <RouterLink to="/chapter8/16-load-vrml">16-load-vrml</RouterLink>
     
+    <h1>Chapter9</h1>
+    <RouterLink to="/chapter9/01-basic-animation">01-basic-animation</RouterLink>
+
+    
   </div>
 </template>
 
