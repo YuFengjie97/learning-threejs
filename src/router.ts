@@ -323,6 +323,10 @@ const routes: Array<RouteRecordRaw> = [
       path: '12-load-pdb',
       component:()=>import('@/views/chapter8/12-load-pdb.vue')
     },
+    {
+      path: '13-load-ply',
+      component:()=>import('@/views/chapter8/13-load-ply.vue')
+    },
   ]
   },
   { path: '/:path(.*)', component: NotFound },
