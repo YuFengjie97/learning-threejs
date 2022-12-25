@@ -85,7 +85,8 @@
     
     <h1>Chapter9</h1>
     <RouterLink to="/chapter9/01-basic-animation">01-basic-animation</RouterLink>
-
+    <RouterLink to="/chapter9/02-selecting-objects">02-selecting-objects</RouterLink>
+    
     
   </div>
 </template>
