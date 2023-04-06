@@ -8,6 +8,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/shader/',
+    children: [
+      {
+        path: 'base',
+        component: () => import('@/views/shader/base.vue')
+      }
+    ]
+  },
+  {
     path: '/chapter1/',
     children: [
       {
