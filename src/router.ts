@@ -12,9 +12,13 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: 'base',
-        component: () => import('@/views/shader/base.vue')
-      }
-    ]
+        component: () => import('@/views/shader/base.vue'),
+      },
+      {
+        path: 'triangle',
+        component: () => import('@/views/shader/triangle/index.vue'),
+      },
+    ],
   },
   {
     path: '/chapter1/',
@@ -292,62 +296,70 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/chapter8/',
-    children:[{
-      path: '01-grouping',
-      component:()=>import('@/views/chapter8/01-grouping.vue')
-    },
-    {
-      path: '03-load-save-json-object',
-      component:()=>import('@/views/chapter8/03-load-save-json-object.vue')
-    },
-    {
-      path: '04-load-save-json-scene',
-      component:()=>import('@/views/chapter8/04-load-save-json-scene.vue')
-    },
-    {
-      path: '05-blender-from-json',
-      component:()=>import('@/views/chapter8/05-blender-from-json.vue')
-    },
-    {
-      path: '06-load-obj',
-      component:()=>import('@/views/chapter8/06-load-obj.vue')
-    },
-    {
-      path: '07-load-obj-mtl',
-      component:()=>import('@/views/chapter8/07-load-obj-mtl.vue')
-    },
-    {
-      path: '08-load-collada',
-      component:()=>import('@/views/chapter8/08-load-collada.vue')
-    },
-    {
-      path: '09-load-stl',
-      component:()=>import('@/views/chapter8/09-load-stl.vue')
-    },
-    {
-      path: '11-load-vtk',
-      component:()=>import('@/views/chapter8/11-load-vtk.vue')
-    },
-    {
-      path: '12-load-pdb',
-      component:()=>import('@/views/chapter8/12-load-pdb.vue')
-    },
-    {
-      path: '13-load-ply',
-      component:()=>import('@/views/chapter8/13-load-ply.vue')
-    },
-    {
-      path: '16-load-vrml',
-      component:()=>import('@/views/chapter8/16-load-vrml.vue')
-    },
-  ]
+    children: [
+      {
+        path: '01-grouping',
+        component: () => import('@/views/chapter8/01-grouping.vue'),
+      },
+      {
+        path: '03-load-save-json-object',
+        component: () =>
+          import('@/views/chapter8/03-load-save-json-object.vue'),
+      },
+      {
+        path: '04-load-save-json-scene',
+        component: () => import('@/views/chapter8/04-load-save-json-scene.vue'),
+      },
+      {
+        path: '05-blender-from-json',
+        component: () => import('@/views/chapter8/05-blender-from-json.vue'),
+      },
+      {
+        path: '06-load-obj',
+        component: () => import('@/views/chapter8/06-load-obj.vue'),
+      },
+      {
+        path: '07-load-obj-mtl',
+        component: () => import('@/views/chapter8/07-load-obj-mtl.vue'),
+      },
+      {
+        path: '08-load-collada',
+        component: () => import('@/views/chapter8/08-load-collada.vue'),
+      },
+      {
+        path: '09-load-stl',
+        component: () => import('@/views/chapter8/09-load-stl.vue'),
+      },
+      {
+        path: '11-load-vtk',
+        component: () => import('@/views/chapter8/11-load-vtk.vue'),
+      },
+      {
+        path: '12-load-pdb',
+        component: () => import('@/views/chapter8/12-load-pdb.vue'),
+      },
+      {
+        path: '13-load-ply',
+        component: () => import('@/views/chapter8/13-load-ply.vue'),
+      },
+      {
+        path: '16-load-vrml',
+        component: () => import('@/views/chapter8/16-load-vrml.vue'),
+      },
+    ],
   },
   {
     path: '/chapter9/',
-    children:[
-      {path: '01-basic-animation', component: ()=>import('@/views/chapter9/01-basic-animation.vue')},
-      {path: '02-selecting-objects', component: ()=>import('@/views/chapter9/02-selecting-objects.vue')},
-    ]
+    children: [
+      {
+        path: '01-basic-animation',
+        component: () => import('@/views/chapter9/01-basic-animation.vue'),
+      },
+      {
+        path: '02-selecting-objects',
+        component: () => import('@/views/chapter9/02-selecting-objects.vue'),
+      },
+    ],
   },
   { path: '/:path(.*)', component: NotFound },
 ]
