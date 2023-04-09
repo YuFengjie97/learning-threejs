@@ -11,12 +11,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/shader/',
     children: [
       {
-        path: 'base',
-        component: () => import('@/views/shader/base.vue'),
+        path: '',
+        component: () => import('@/views/shader/index.vue'),
       },
       {
-        path: 'triangle',
-        component: () => import('@/views/shader/triangle/index.vue'),
+        path: '1',
+        component: () => import('@/views/shader1/index.vue'),
       },
     ],
   },

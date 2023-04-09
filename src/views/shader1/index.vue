@@ -13,6 +13,9 @@ import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
+import vertexShader from './vertex.glsl?raw'
+import fragmentShader from './fragment.glsl?raw'
+
 const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
 const canvasDom = ref<HTMLElement>()
@@ -25,30 +28,25 @@ let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
-function initMesh() {
-  const vertexShader = `
-  void main() {
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position.x+10.0, position.y, position.z+5.0, 1.0);
-  }
-`
-  const fragmentShader = `
-  void main() {
-    gl_FragColor = vec4(1.0, 0.58, 1.96, 4.0);
-  }
-`
+const uniforms = {
+  iTime: { value: 0 },
+  iResolution: { value: new THREE.Vector2() },
+}
 
+function initMesh() {
   const shaderMaterial = new THREE.ShaderMaterial({
-    vertexShader,
-    fragmentShader
+    uniforms,
+    // vertexShader,
+    fragmentShader,
   })
 
-  const boxGeo = new THREE.BoxGeometry(30,30,30)
+  const geo = new THREE.PlaneGeometry(2, 2)
 
-  const cube = new THREE.Mesh(boxGeo, shaderMaterial)
+  const mesh = new THREE.Mesh(geo, shaderMaterial)
 
-  cube.position.set(10, 10, 10)
+  mesh.position.set(10, 10, 10)
 
-  scene.add(cube)
+  scene.add(mesh)
 }
 
 onMounted(() => {
@@ -62,7 +60,7 @@ const params = {}
 function initGUI() {
   let gui = new GUI({
     autoPlace: false,
-    width: 300
+    width: 300,
   })
   gui.domElement.style.cssText = 'position: fixed; top: 0; right: 0;'
   canvasCon.value?.appendChild(gui.domElement)
@@ -70,6 +68,7 @@ function initGUI() {
 
 function animate() {
   // doSomething
+  uniforms.iTime.value += 0.01
 }
 // three初始化
 function initTHREE() {
@@ -78,7 +77,7 @@ function initTHREE() {
   camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000)
   renderer = new THREE.WebGLRenderer({
     canvas: canvasDom.value,
-    antialias: true
+    antialias: true,
   })
   renderer.setSize(width, height)
   // renderer.setPixelRatio(window.devicePixelRatio) // 不推荐
