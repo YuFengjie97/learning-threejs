@@ -1,7 +1,7 @@
 <template>
   <div class="viewCon">
     <div class="canvasCon" ref="canvasCon">
-      <canvas class="canvas" ref="canvasDom" />
+      <canvas class="canvas" ref="canvasDom" @mousemove="onMouseMove"/>
     </div>
   </div>
 </template>
@@ -28,9 +28,23 @@ let scene: THREE.Scene
 let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
+const mouse = {
+  x: 0,
+  y: 0
+}
+
+function onMouseMove(e:MouseEvent) {
+  mouse.x = e.clientX
+  mouse.y = e.clientY
+}
+
 const uniforms = {
-  iTime: { value: 0 },
-  iResolution: { value: new THREE.Vector2() },
+  u_resolution: {
+    value: new THREE.Vector2(width, height)
+  },
+  u_mouse: {
+    value: new THREE.Vector2(width/2,height/2)
+  }
 }
 
 function initMesh() {
@@ -40,7 +54,7 @@ function initMesh() {
     fragmentShader,
   })
 
-  const geo = new THREE.PlaneGeometry(2, 2)
+  const geo = new THREE.PlaneGeometry(100, 100)
 
   const mesh = new THREE.Mesh(geo, shaderMaterial)
 
@@ -67,8 +81,8 @@ function initGUI() {
 }
 
 function animate() {
-  // doSomething
-  uniforms.iTime.value += 0.01
+  const t = performance.now() / 1000
+  uniforms.u_mouse.value.set(mouse.x, mouse.y).normalize()
 }
 // three初始化
 function initTHREE() {
@@ -96,7 +110,7 @@ function initTHREE() {
   // 轨道控制器
   orbitControls = new OrbitControls(camera, renderer.domElement)
   orbitControls.target = new THREE.Vector3(0, 0, 0)
-  orbitControls.object.position.set(100, 100, 100)
+  orbitControls.object.position.set(0, 0, 100)
   orbitControls.update()
 }
 // 绘制

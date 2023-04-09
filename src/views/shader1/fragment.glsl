@@ -1,23 +1,11 @@
-  // fragment shader code here
-  #define t iTime
-  #define r iResolution.xy
+precision mediump float;
 
-void mainImage(out vec4 fragColor, in vec2 fragCoord) {
-	vec3 c;
-	float l, z = t;
-	for(int i = 0; i < 3; i++) {
-		vec2 uv, p = fragCoord.xy / r;
-		uv = p;
-		p -= .5;
-		p.x *= r.x / r.y;
-		z += .07;
-		l = length(p);
-		uv += p / l * (sin(z) + 1.) * abs(sin(l * 9. - z - z));
-		c[i] = .01 / length(mod(uv, 1.) - .5);
-	}
-	fragColor = vec4(c / l, t);
-}
+uniform vec2 u_resolution;
+uniform vec2 u_mouse;
+uniform float u_time;
 
 void main() {
-	mainImage(gl_FragColor, gl_FragCoord.xy);
+	// vec2 st = gl_FragCoord.xy/u_resolution;
+	vec2 st = u_mouse.xy;
+	gl_FragColor = vec4(st.x,st.y,0.0,1.0);
 }
