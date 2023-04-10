@@ -14,7 +14,7 @@ import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import vertexShader from './vertex.glsl?raw'
-import fragmentShader from './fragment.glsl?raw'
+import fragmentShader from './fragment1.glsl?raw'
 
 const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
@@ -29,7 +29,8 @@ let camera: THREE.PerspectiveCamera
 let renderer: THREE.WebGLRenderer
 
 const uniforms = {
-  time: { value: 1.0 },
+  u_time: { value: 0.0 },
+  u_resolution: { value: new THREE.Vector2(width, height) }
 }
 
 function initMesh() {
@@ -67,7 +68,7 @@ function initGUI() {
 
 function animate() {
   // doSomething
-  uniforms.time.value += 0.01
+  uniforms.u_time.value += 0.007
 }
 // three初始化
 function initTHREE() {

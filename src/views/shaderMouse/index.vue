@@ -49,13 +49,13 @@ function initMesh() {
     fragmentShader,
   })
 
-  const geo = new THREE.PlaneGeometry(2, 2)
+  // const geo = new THREE.PlaneGeometry(1, 1)
 
-  const mesh = new THREE.Mesh(geo, shaderMaterial)
+  // const mesh = new THREE.Mesh(geo, shaderMaterial)
 
-  mesh.position.set(10, 10, 10)
+  // mesh.position.set(0, 0, 0)
 
-  scene.add(mesh)
+  // scene.add(mesh)
 }
 
 onMounted(() => {
