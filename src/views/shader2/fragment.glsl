@@ -1,6 +1,3 @@
-// Author: Inigo Quiles
-// Title: Expo
-
 #ifdef GL_ES
 precision mediump float;
 #endif
@@ -19,7 +16,8 @@ float plot(vec2 st, float pct) {
 void main() {
 	vec2 st = gl_FragCoord.xy / u_resolution;
 
-	float y = pow(st.x, 5.0);
+    // Smooth interpolation between 0.1 and 0.9
+	float y = smoothstep(0.1, 0.9, st.x);
 
 	vec3 color = vec3(y);
 

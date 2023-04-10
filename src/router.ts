@@ -22,6 +22,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '2',
         component: () => import('@/views/shader2/index.vue'),
       },
+      {
+        path: 'mouse',
+        component: () => import('@/views/shaderMouse/index.vue'),
+      },
     ],
   },
   {
