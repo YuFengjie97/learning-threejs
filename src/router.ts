@@ -18,6 +18,10 @@ const routes: Array<RouteRecordRaw> = [
         path: '1',
         component: () => import('@/views/shader1/index.vue'),
       },
+      {
+        path: '2',
+        component: () => import('@/views/shader2/index.vue'),
+      },
     ],
   },
   {
