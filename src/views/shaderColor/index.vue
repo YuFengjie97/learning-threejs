@@ -7,18 +7,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue'
-import { GUI } from 'dat.gui'
 import * as THREE from 'three'
-import Stats from 'three/examples/jsm/libs/stats.module.js'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import vertexShader from './vertex.glsl?raw'
-import fragmentShader from './fragment.glsl?raw'
+import fragmentShader from './fragment1.glsl?raw'
 
 import { useTHREE } from '@/hooks/three'
-
-const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
 const {
   canvasDom,
@@ -37,10 +31,6 @@ const uniforms = {
   u_time: {
     value: 0,
   },
-}
-
-function onMouseMove(e: MouseEvent) {
-  uniforms.u_mouse.value.set(e.clientX, e.clientY)
 }
 
 function initMesh(): Array<THREE.Mesh> {
@@ -62,5 +52,9 @@ function initMesh(): Array<THREE.Mesh> {
 function animate() {
   const t = performance.now() / 1000
   uniforms.u_time.value = t
+}
+
+function onMouseMove(e: MouseEvent) {
+  uniforms.u_mouse.value.set(e.clientX, e.clientY)
 }
 </script>
