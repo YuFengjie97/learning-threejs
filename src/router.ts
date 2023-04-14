@@ -11,6 +11,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/shader/',
     children: [
       {
+        path: 'model-func',
+        component: () => import('@/views/shader-modelFunc/index.vue')
+      },
+      {
         path: '',
         component: () => import('@/views/shader/index.vue'),
       },
