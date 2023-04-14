@@ -29,6 +29,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'color',
         component: () => import('@/views/shaderColor/index.vue'),
+      },
+      {
+        path: 'shape',
+        component: () => import('@/views/shaderShape/index.vue'),
       }
     ],
   },
