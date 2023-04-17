@@ -12,7 +12,8 @@ import * as THREE from 'three'
 import vertexShader from './vertex.glsl?raw'
 // import fragmentShader from './fragmentTest.glsl?raw'
 // import fragmentShader from './fragment1.glsl?raw'
-import fragmentShader from './fragmentSun.glsl?raw'
+// import fragmentShader from './fragmentSun.glsl?raw'
+import fragmentShader from './fragmentHSB2.glsl?raw'
 
 import { useTHREE } from '@/hooks/three'
 
