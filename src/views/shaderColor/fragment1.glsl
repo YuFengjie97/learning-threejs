@@ -1,3 +1,5 @@
+// 动态渐变色，随时间改变
+
 #ifdef GL_ES
 precision mediump float;
 #endif

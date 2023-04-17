@@ -1,3 +1,4 @@
+// the book三条曲线，颜色通道叠加到栗子
 #ifdef GL_ES
 precision mediump float;
 #endif
