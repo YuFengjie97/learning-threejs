@@ -10,7 +10,8 @@
 import * as THREE from 'three'
 
 import vertexShader from './vertex.glsl?raw'
-import fragmentShader from './fragment3.glsl?raw'
+// import fragmentShader from './fragment3.glsl?raw'
+import fragmentShader from './f1.glsl?raw'
 
 import { useTHREE } from '@/hooks/three'
 
@@ -56,10 +57,6 @@ function animate() {
   // const g = sin(t + 0.4)
   // const b = sin(t + 0.2)
   
-  const r = random()
-  const g = random()
-  // const b = random()
-  uniforms.u_color.value.set(r, g, b)
 }
 
 function onMouseMove(e: MouseEvent) {

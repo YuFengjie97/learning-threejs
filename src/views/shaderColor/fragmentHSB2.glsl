@@ -24,12 +24,21 @@ void main() {
 
   float angle = atan(c.y, c.x); // 在hsb极坐标下，角度大小代表的是色相
 
-  float radius = length(c) * 2.0; // 在hsb极坐标下，半径距离代表的是饱和度
+  float dist = length(c);
+
+  float radius = dist * 2.0; // 在hsb极坐标下，半径距离代表的是饱和度
 
   // float t = sin(u_time) * 3.0;
   float t = 1.0 - pow(abs(sin(PI * sin(u_time) / 2.0)), 0.5);
 
   vec3 rgb = hsb2rgb(vec3(angle / PI + t, radius, 1.0));
 
-  gl_FragColor = vec4(rgb, 1.0);
+  vec3 color = rgb;
+
+  if(dist > 0.2 || dist < 0.14) {
+    // color = vec3(0.0);
+    color = mix(vec3(0.0), rgb, 0.2);
+  }
+
+  gl_FragColor = vec4(color, 1.0);
 }
