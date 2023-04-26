@@ -17,7 +17,7 @@ void main() {
 
 	vec2 o = vec2(0.5, 0.5);
 
-	float r = 0.4;
+	float r = 0.5;
 
 	float pct = circle(st, o, r);
 
