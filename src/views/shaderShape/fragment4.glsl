@@ -15,7 +15,7 @@ float circle(vec2 st, vec2 o, float r) {
 void main() {
 	vec2 st = gl_FragCoord.xy / u_resolution.xy;
 
-	vec2 o = vec2(st.x / 2.0, st.x / 2.0);
+	vec2 o = vec2(0.5, 0.5);
 
 	float r = 0.4;
 
