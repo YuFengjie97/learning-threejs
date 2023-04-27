@@ -19,14 +19,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/shader/index.vue'),
       },
       {
-        path: '1',
-        component: () => import('@/views/shader1/index.vue'),
-      },
-      {
-        path: '2',
-        component: () => import('@/views/shader2/index.vue'),
-      },
-      {
         path: 'mouse',
         component: () => import('@/views/shaderMouse/index.vue'),
       },
@@ -37,6 +29,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'shape',
         component: () => import('@/views/shaderShape/index.vue'),
+      },
+      {
+        path: 'matrices',
+        component: () => import('@/views/shaderMatrices/index.vue')
       }
     ],
   },
