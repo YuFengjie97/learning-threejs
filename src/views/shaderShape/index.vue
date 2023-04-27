@@ -33,13 +33,13 @@ const uniforms = {
     value: new THREE.Vector3(1, 1, 1),
   },
   u_r1: {
-    value: 0.01
+    value: 0.1
   },
   u_r2: {
-    value: 0.03
+    value: 0.3
   },
   u_r3: {
-    value: 0.05
+    value: 0.5
   },
   u_r4: {
     value: 0.09
