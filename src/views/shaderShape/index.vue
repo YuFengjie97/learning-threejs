@@ -15,7 +15,7 @@ import fragmentShader from './fragment5.glsl?raw'
 
 import { useTHREE } from '@/hooks/three'
 
-const { random, PI, floor, ceil, min, max, sin, cos, tan } = Math
+const { random, PI, floor, ceil, min, max, sin, cos, tan, abs } = Math
 
 const { canvasDom, canvasCon, width, height } = useTHREE(initMesh, animate)
 
@@ -31,6 +31,18 @@ const uniforms = {
   },
   u_color: {
     value: new THREE.Vector3(1, 1, 1),
+  },
+  u_r1: {
+    value: 0.01
+  },
+  u_r2: {
+    value: 0.03
+  },
+  u_r3: {
+    value: 0.05
+  },
+  u_r4: {
+    value: 0.09
   },
 }
 
@@ -56,7 +68,10 @@ function animate() {
   // const r = sin(t)
   // const g = sin(t + 0.4)
   // const b = sin(t + 0.2)
-  
+
+  uniforms.u_r1.value = abs(sin(t) * 0.1)
+  uniforms.u_r2.value = abs(cos(t) * 0.1)
+  uniforms.u_r3.value = random() * 0.1
 }
 
 function onMouseMove(e: MouseEvent) {
