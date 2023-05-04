@@ -52,7 +52,7 @@ function initMesh(): Array<THREE.Mesh> {
     fragmentShader,
   })
 
-  const geo = new THREE.PlaneGeometry(2, 2)
+  const geo = new THREE.PlaneGeometry(1000, 1000)
 
   const mesh = new THREE.Mesh(geo, shaderMaterial)
 
