@@ -4,18 +4,30 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 
-vec3 plotRect(float base, vec3 baseColor, vec3 color, vec2 pos, float w, float h) {
-	pos = pos.xy / base;
-	w = w / base;
-	h = w / base;
-	float t = pos.y;
-	float b = pos.y - h;
+/**
+ * pos: 矩形左下角坐标
+ */
+vec3 plotRect(vec2 resolution, vec2 st, vec3 baseColor, vec3 color, vec2 pos, float w, float h) {
+	st = st.xy / resolution.y;
+	pos = pos / resolution;
+	w = w / resolution.y;
+	h = h / resolution.y;
+	float t = pos.y + h;
+	float b = pos.y;
 	float l = pos.x;
 	float r = pos.x + w;
-	float ver = smoothstep(b, t, pos.y);
-	float hor = smoothstep(l, r, pos.x);
+	float ver = smoothstep(b, t, st.y);
+	float hor = smoothstep(l, r, st.x);
+
+	if (ver == 1.0) {
+		ver = 0.0;
+	}
+	if (hor == 1.0) {
+		hor = 0.0;
+	}
 	float pct = ver * hor;
-	if(pct == 0.0 || pct == 1.0) {
+
+	if (pct == 0.0) {
 		return baseColor;
 	} else {
 		return color;
@@ -23,8 +35,11 @@ vec3 plotRect(float base, vec3 baseColor, vec3 color, vec2 pos, float w, float h
 }
 
 void main() {
-	float base = u_resolution.y;
 	vec3 baseColor = vec3(0.3);
-	vec3 color = plotRect(base, baseColor, vec3(0.07f, 0.77f, 0.79f), vec2(200.0), 100.0, 100.0);
+
+	vec2 st = gl_FragCoord.xy;
+
+	vec3 color = plotRect(u_resolution, st, baseColor, vec3(0.07f, 0.77f, 0.79f), vec2(200.0, 200.0), 100.0, 100.0);
+	
 	gl_FragColor = vec4(color, 1.0);
 }
