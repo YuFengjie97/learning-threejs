@@ -6,26 +6,26 @@ uniform float u_time;
 
 #define PI 3.14159265359;
 
-float box(vec2 st, vec2 size) {
-  vec2 uv = smoothstep(size, size + vec2(0.01), st);
-  uv *= smoothstep(size, size + vec2(0.01), vec2(1.0) - st);
-  return uv.x * uv.y;
-}
+float circle(vec2 uv, vec2 o, float r, float w) {
+  float d = distance(uv, o);
 
-mat2 rotate2d(float _angle) {
-  return mat2(cos(_angle), -sin(_angle), sin(_angle), cos(_angle));
+  // float cOut = 1.0 - step(r, d);
+  // float cInner = 1.0 - step(r - w, d);
+  // return cOut - cInner;
+
+  // float cOut = 1.0 - smoothstep(r - w, r, d);
+  // float cInner = 1.0 - step(r - w, d);
+  // return cOut - cInner;
+
+  float cOut = smoothstep(r - w / 2.0, r, d);
+  float cInner = smoothstep(r, r + w / 2.0, d);
+  return cOut - cInner;
 }
 
 void main() {
-  vec2 st = gl_FragCoord.xy / u_resolution.xy;
-  vec2 size = vec2(0.3);
+  vec3 colorBase = vec3(0.0);
 
-  vec2 translate = vec2(cos(u_time), sin(u_time));
-  st += translate * 0.3;
+  colorBase += circle(gl_FragCoord.xy, vec2(300.0), 100.0, 40.0) * vec3(0.0, 1.0, 0.1);
 
-  st = rotate2d(sin(u_time)*PI) * st;
-
-  float b1 = box(st, size);
-
-  gl_FragColor = vec4(vec3(b1), 1.0);
+  gl_FragColor = vec4(colorBase, 1.0);
 }
