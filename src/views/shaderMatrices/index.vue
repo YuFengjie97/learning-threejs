@@ -64,7 +64,7 @@ function initMesh(): Array<THREE.Mesh> {
 }
 
 function animate() {
-  const t = performance.now() / 1000
+  const t = performance.now() / 100
   uniforms.u_time.value = t
   // const r = sin(t)
   // const g = sin(t + 0.4)
