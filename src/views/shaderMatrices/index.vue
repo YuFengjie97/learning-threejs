@@ -12,7 +12,8 @@ import * as THREE from 'three'
 import vertexShader from './vertex.glsl?raw'
 // import fragmentShader from './fragment2.fs?raw'
 // import fragmentShader from './fragment3.fs?raw'
-import fragmentShader from './noise.fs?raw'
+// import fragmentShader from './noise.fs?raw'
+import fragmentShader from './frag.fs?raw'
 
 import { useTHREE } from '@/hooks/three'
 
@@ -47,6 +48,8 @@ const uniforms = {
   },
 }
 
+let t
+
 function initMesh(): Array<THREE.Mesh> {
   const shaderMaterial = new THREE.ShaderMaterial({
     uniforms,
@@ -64,7 +67,8 @@ function initMesh(): Array<THREE.Mesh> {
 }
 
 function animate() {
-  const t = performance.now() / 100
+  t = performance.now() / 1000;
+  
   uniforms.u_time.value = t
   // const r = sin(t)
   // const g = sin(t + 0.4)
@@ -73,6 +77,11 @@ function animate() {
   uniforms.u_r1.value = abs(sin(t) * 0.1)
   uniforms.u_r2.value = abs(cos(t) * 0.1)
   uniforms.u_r3.value = random() * 0.1
+
+  if (t % PI > 3.1) {
+    uniforms.u_color.value = new THREE.Vector3(random(), random(), random())
+  }
+
 }
 
 function onMouseMove(e: MouseEvent) {
