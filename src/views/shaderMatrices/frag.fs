@@ -35,44 +35,48 @@ float box(vec2 uv, vec2 pos, vec2 size) {
   return w * h;
 }
 
-float genCross(vec2 uv, vec2 pos, vec2 size) {
-  float box1 = box(uv, pos, size);
-  float box2 = box(uv, pos, size.yx);
+float box(vec2 uv, vec2 size) {
+  float t = 0.0 + size.y / 2.0;
+  float b = 0.0 - size.y / 2.0;
+  float l = 0.0 - size.x / 2.0;
+  float r = 0.0 + size.x / 2.0;
 
-  return box1 + box2;
+  float w = SMOOTH(l, uv.x) - SMOOTH(r, uv.x);
+  float h = SMOOTH(b, uv.y) - SMOOTH(t, uv.y);
+  return w * h;
 }
 
-float f5(float x, float t) {
-  return (t + floor(x - t)) / 2.0 - 5.0;
+float genCross(vec2 uv, vec2 size) {
+  // float box1 = box(uv, pos, size);
+  // float box2 = box(uv, pos, size.yx);
+  float box1 = box(uv, size);
+  float box2 = box(uv, size.yx);
+  return box1 + box2;
 }
 
 mat2 rotate2d(float _angle) {
   return mat2(cos(_angle), -sin(_angle), sin(_angle), cos(_angle));
 }
 
+mat2 scale(vec2 _scale) {
+  return mat2(_scale.x, 0.0, 0.0, _scale.y);
+}
+
 void main() {
   vec2 uv = gl_FragCoord.xy;
-  vec2 center = u_resolution.xy / 2.0;
   vec3 color = vec3(0.0);
 
-  vec2 translate = vec2(cos(u_time), sin(u_time));
-  // vec2 translate = vec2(cos(f5(uv.x, u_time)), sin(f5(uv.x, u_time)));
-  uv += translate * 300.0;
+  vec2 tCenter = u_resolution.xy / 2.0;
+  uv -= tCenter;
+  // uv = rotate2d(u_time * 4.0) * uv;
 
-  uv -= vec2(0.5);
-  mat2 rotate = rotate2d(sin(u_time)*PI);
-  uv *= rotate * uv;
-  uv += vec2(0.5);
+  uv = scale(vec2(sin(u_time) + 1.2)) * uv;
 
-  // float translateX = 4.0 + 4.0 * smoothstep(0.0, 0.7, sin(u_time * 10.0));
-  // float translateY = sin(f5(uv.x, u_time)) - 5.0;
-  // uv += vec2(translateY, translateY) * 30.0;
+  // vec2 t1 = vec2(cos(u_time), sin(u_time));
+  // uv += t1 * 1.0;
 
-  float colorPct = abs(sin(u_time));
-
-  vec3 cross1 = genCross(uv, center, vec2(200.0, 50.0)) * u_color;
-
-  color = mix(color, cross1, colorPct);
+  float cross1 = genCross(uv, vec2(100.0, 20.0));
+  color += cross1 * vec3(0.0f, 1.0f, 0.95f);
 
   gl_FragColor = vec4(color, 1.0);
 }
