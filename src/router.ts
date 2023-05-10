@@ -33,6 +33,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'matrices',
         component: () => import('@/views/shaderMatrices/index.vue')
+      },
+      {
+        path: 'patterns',
+        component: () => import('@/views/shaderPatterns/index.vue')
       }
     ],
   },
