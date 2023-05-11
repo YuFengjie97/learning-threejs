@@ -34,14 +34,13 @@ float genBound(vec2 st) {
   // vec2 lb = smoothstep(vec2(0.0) - vec2(0.01), vec2(0.0), st) - smoothstep(vec2(0.0), vec2(0.0) + vec2(0.01), st);
   // vec2 rt = smoothstep(vec2(1.0) - vec2(0.01), vec2(1.0), st) - smoothstep(vec2(1.0), vec2(1.0) + vec2(0.01), st);
   // return lb.x + lb.y + rt.x + rt.y;
-  float lb = genCorner(vec2(0.0),st);
-  float rt = genCorner(vec2(1.0),st);
+  float lb = genCorner(vec2(0.0), st);
+  float rt = genCorner(vec2(1.0), st);
   return lb + rt;
 }
 
 // 在st划定的区域内的中心画一个size的矩形
 float box(vec2 st, vec2 size) {
-  st = vec2(0.5) - size * 0.5;
   vec2 lb = vec2(0.0);
   vec2 rt = size;
 
@@ -52,20 +51,27 @@ float box(vec2 st, vec2 size) {
 
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
-  vec3 color = vec3(0.0);
+  // vec2 st = gl_FragCoord.xy / u_resolution.xy;
+  // st.x *= u_resolution.x/u_resolution.y;
 
-  st *= 4.0;
+  vec3 color = vec3(0.57f, 0.8f, 0.79f);
+
+  st *= vec2(10.0, 20.0);
+  st.x += step(1.0, mod(st.y,2.0)) * 0.5;
   st = fract(st);
 
-  vec2 boxSize = vec2(0.25, 0.25);
-  st -= vec2(0.5);
+  vec2 boxSize = vec2(0.9, 0.8);
+  st -= vec2(0.5) - boxSize * 0.5;
   float b = box(st, boxSize);
-  st += vec2(0.5);
-  color += b * vec3(0.29, 0.79, 0.15);
+  if(b == 1.0) {
+    color = b * vec3(0.88f, 0.35f, 0.07f); // 颜色的叠加才算是真正造型函数执行的那一步，所以transfrom应该在此之前和在此之后复原
+  }
+  st += vec2(0.5) - boxSize * 0.5;
 
-  float bound = genBound(st);
-  vec3 boundColor = vec3(0.91, 0.86, 0.28);
-  color += bound * boundColor;
+  // float bound = genBound(st);
+  // vec3 boundColor = vec3(0.91, 0.86, 0.28);
+  // color += bound * boundColor;
+
   // if(bound != 0.0) {
   //   color *= 0.0;
   //   color += bound * boundColor;
