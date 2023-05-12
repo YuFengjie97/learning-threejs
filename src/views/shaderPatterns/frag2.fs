@@ -27,9 +27,10 @@ void tile(inout vec2 st, float zoom) {
 }
 
 float triangle(vec2 st) {
-  float z1 = smoothstep(st.x , st.x - 0.01, st.y);
-  // float z2 = smoothstep()
-  return z1;
+  float z1 = 1.0 - smoothstep(st.x - 0.01, st.x, st.y);
+  float z2 = smoothstep(0.0, 0.01, st.y);
+  float z3 = 1.0 - smoothstep(1.0 - 0.01, 1.0, st.x);
+  return z1 * z2 * z3;
 }
 
 void rotate2D(inout vec2 st, float angle) {
@@ -38,21 +39,37 @@ void rotate2D(inout vec2 st, float angle) {
   st += 0.5;
 }
 
+void rotateTilePattern(inout vec2 st) {
+  st *= 2.0;
+  float index = 0.0;
+  index += step(1.0, mod(st.x, 2.0));
+  index += step(1.0, mod(st.y, 2.0));
+  st = fract(st);
+  // if(index == 1.0) {
+  //   rotate2D(st, PI / 180.0 * 45.0);
+  // } else if(index == 2.0) {
+  //   rotate2D(st, PI / 180.0 * 90.0);
+
+  // } else if(index == 3.0) {
+  //   rotate2D(st, PI / 180.0 * 135.0);
+  // }
+
+  if (index == 2.0 || index == 1.0) {
+    rotate2D(st, PI / 180.0 * 90.0);
+  }
+}
+
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   vec3 color = vec3(0.0);
 
-  // tile(st, 10.0);
+  tile(st, 10.0);
 
-  float zoom = 10.0;
-  st *= zoom;
-  st = fract(st);
+  // float zoom = 10.0;
+  // st *= zoom;
+  // st = fract(st);
 
-
-  float index = floor(st.y) * zoom + floor(st.x);
-
-  rotate2D(st, PI / 180.0 * .0);
-
+  rotateTilePattern(st);
 
   float t = triangle(st);
   color += t * vec3(1.0);
