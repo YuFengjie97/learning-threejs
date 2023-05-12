@@ -49,22 +49,44 @@ float box(vec2 st, vec2 size) {
   return uv.x * uv.y;
 }
 
+vec2 tiles(vec2 st, vec2 size, float u_time, float speed) {
+  st *= size;
+  float time = u_time * speed;
+  if(fract(time) > 0.5) {
+    if(fract(st.y * 0.5) > 0.5) {
+      st.x += fract(u_time) * 2.0;
+    } else {
+      st.x -= fract(u_time) * 2.0;
+    }
+  } else {
+    if(fract(st.x * 0.5) > 0.5) {
+      st.y += fract(u_time) * 2.0;
+    } else {
+      st.y -= fract(u_time) * 2.0;
+    }
+  }
+
+  return fract(st);
+}
+
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   // vec2 st = gl_FragCoord.xy / u_resolution.xy;
   // st.x *= u_resolution.x/u_resolution.y;
 
-  vec3 color = vec3(0.57f, 0.8f, 0.79f);
+  vec3 color = vec3(0.26f, 0.23f, 0.07f);
 
-  st *= vec2(10.0, 20.0);
-  st.x += step(1.0, mod(st.y,2.0)) * 0.5;
-  st = fract(st);
+  st = tiles(st, vec2(10.0, 20.0), u_time, 0.5);
+  // st *= vec2(10.0, 20.0);
+  // st.x += step(1.0, mod(st.y, 2.0)) * 0.5;
+  // st = fract(st);
 
   vec2 boxSize = vec2(0.9, 0.8);
+  // vec2 boxSize = vec2(abs(sin(u_time)), abs(cos(u_time)));
   st -= vec2(0.5) - boxSize * 0.5;
   float b = box(st, boxSize);
   if(b == 1.0) {
-    color = b * vec3(0.88f, 0.35f, 0.07f); // 颜色的叠加才算是真正造型函数执行的那一步，所以transfrom应该在此之前和在此之后复原
+    color = b * vec3(0.67f, 0.13f, 0.13f); // 颜色的叠加才算是真正造型函数执行的那一步，所以transfrom应该在此之前和在此之后复原
   }
   st += vec2(0.5) - boxSize * 0.5;
 
