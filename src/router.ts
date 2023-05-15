@@ -8,6 +8,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/gsap',
+    component: () => import('@/views/gsap/index.vue')
+  },
+  {
     path: '/shader/',
     children: [
       {
