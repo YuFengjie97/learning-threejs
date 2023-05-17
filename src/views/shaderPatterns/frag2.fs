@@ -1,4 +1,4 @@
-// 旋转团
+// 旋转三角
 precision mediump float;
 
 #define PI 3.14159265358979323846
@@ -26,6 +26,7 @@ void tile(inout vec2 st, float zoom) {
   st = fract(st);
 }
 
+// 非常严谨的三角形，超出区域是白色
 float triangle(vec2 st) {
   float z1 = 1.0 - smoothstep(st.x - 0.01, st.x, st.y);
   float z2 = smoothstep(0.0, 0.01, st.y);
@@ -43,33 +44,30 @@ void rotateTilePattern(inout vec2 st) {
   st *= 2.0;
   float index = 0.0;
   index += step(1.0, mod(st.x, 2.0));
-  index += step(1.0, mod(st.y, 2.0));
-  st = fract(st);
-  // if(index == 1.0) {
-  //   rotate2D(st, PI / 180.0 * 45.0);
-  // } else if(index == 2.0) {
-  //   rotate2D(st, PI / 180.0 * 90.0);
+  index += step(1.0, mod(st.y, 2.0)) == 1.0 ? 2.0 : 0.0; // 在垂直方向上是加2
 
-  // } else if(index == 3.0) {
-  //   rotate2D(st, PI / 180.0 * 135.0);
-  // }
-
-  if (index == 2.0 || index == 1.0) {
+  if(index == 0.0) {
+    // rotate2D(st, PI / 180.0 * 90.0);
+  } else if(index == 1.0) {
     rotate2D(st, PI / 180.0 * 90.0);
+  } else if(index == 2.0) {
+    rotate2D(st, PI / 180.0 * 270.0);
+  } else if(index == 3.0) {
+    rotate2D(st, PI / 180.0 * 180.0);
   }
+
+  st = fract(st);
 }
 
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   vec3 color = vec3(0.0);
 
-  tile(st, 10.0);
-
-  // float zoom = 10.0;
-  // st *= zoom;
-  // st = fract(st);
+  tile(st, 4.0);
 
   rotateTilePattern(st);
+
+  rotate2D(st, 10.0 * sin(u_time ));
 
   float t = triangle(st);
   color += t * vec3(1.0);
