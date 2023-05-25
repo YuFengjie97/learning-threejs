@@ -1,5 +1,6 @@
 <template>
   <div class='home'>
+    <AnimNum :num="10000"/>
     <h1>Shader</h1>
     <RouterLink to="/shader/model-func">造型函数</RouterLink>
 
@@ -96,6 +97,7 @@
 </template>
 
 <script lang="ts" setup>
+import AnimNum from '@/components/AnimNum.vue';
 import { ref} from 'vue';
 
 </script>
