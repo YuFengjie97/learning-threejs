@@ -1,6 +1,6 @@
 <template>
   <div class='home'>
-    <AnimNum :num="10000"/>
+    <AnimNum :num="1000000"/>
     <h1>Shader</h1>
     <RouterLink to="/shader/model-func">造型函数</RouterLink>
 
