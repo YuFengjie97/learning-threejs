@@ -8,6 +8,10 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('@/views/Home.vue'),
   },
   {
+    path: '/xlsx',
+    component: () => import('@/views/xlsx/index.vue'),
+  },
+  {
     path: '/shader/',
     children: [
       {
