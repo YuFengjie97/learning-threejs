@@ -1,6 +1,7 @@
 <template>
   <div class='home'>
-    <AnimNum :num="1000000"/>
+    <AnimNum :num="a.num" :is-unit="true"/>
+    <button @click="changeNum">changeNum</button>
     <h1>Shader</h1>
     <RouterLink to="/shader/model-func">造型函数</RouterLink>
 
@@ -98,7 +99,16 @@
 
 <script lang="ts" setup>
 import AnimNum from '@/components/AnimNum.vue';
-import { ref} from 'vue';
+import { ref, reactive} from 'vue';
+
+const a = ref({
+  num: 100000
+})
+
+function changeNum() {
+  a.value.num = Math.random() * 2000000 - 1000000
+  console.log(a.value.num);
+}
 
 </script>
 

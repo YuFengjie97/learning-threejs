@@ -1,19 +1,22 @@
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+
+const {abs, floor} = Math
+
 const props = withDefaults(
   defineProps<{
     num: number
-    duration: number
-    ms: number
-    isLocal: boolean
-    isUnit: boolean
+    duration?: number
+    ms?: number
+    isLocal?: boolean
+    isUnit?: boolean
   }>(),
   {
     num: 0,
-    duration: 3000,
+    duration: 1500,
     ms: 10,
     isLocal: true,
-    isUnit: false
+    isUnit: false,
   }
 )
 
@@ -22,39 +25,61 @@ const nStr = ref<string>('0')
 
 let timer: null | NodeJS.Timer = null
 
-function formatUnit(val: number): string {
-  if (val > 1000000) {
-    return `${Math.floor(val / 1000000)}M`
-  } else if (val > 1000) {
-    return `${Math.floor(val / 1000)}K`
-  } else {
-    return `${val}`
+function formatNum(val: number, isLocal: boolean, isUnit: boolean): string {
+  let num: number | string = val
+  let unit = ''
+  if (isUnit) {
+    if (abs(val) > 1000000) {
+      num = floor(val / 1000000)
+      unit = 'M'
+    } else if (abs(val) > 1000) {
+      num = floor(val / 1000)
+      unit = 'K'
+    } else {
+      num = val
+    }
   }
+  if (isLocal) {
+    num = num.toLocaleString()
+  }
+  return `${num}${unit}`
 }
 
-onMounted(() => {
-  const { num, duration, ms, isLocal, isUnit } = props
+function handleAnim() {
+  if (timer) {
+    clearInterval(timer)
+  }
 
-  let inc = Math.floor(num / (duration / ms))
+  const { num, duration, ms, isLocal, isUnit } = props
+  const inc = floor((num - n.value) / (duration / ms))
 
   timer = setInterval(() => {
-    if (n.value < num) {
-      n.value += inc
+    n.value += inc
+
+    if (inc > 0) {
+      if (n.value > num) n.value = num
     } else {
-      n.value = num
+      if (n.value < num) n.value = num
     }
 
-    if (isUnit) {
-      nStr.value = formatUnit(n.value)
-    } else {
-      if(isLocal) {
-        nStr.value =  n.value.toLocaleString()
-      } else {
-        nStr.value = `${n}`
-      }
-    }
+    if (n.value === num) clearInterval(timer!)
+
+    nStr.value = formatNum(n.value, isLocal, isUnit)
   }, ms)
-})
+}
+
+watch(
+  () => props.num,
+  () => {
+    nextTick(() => {
+      handleAnim()
+    })
+  },
+  {
+    immediate: true,
+  }
+)
+
 onUnmounted(() => {
   if (timer) {
     clearInterval(timer)
