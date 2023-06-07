@@ -10,7 +10,7 @@
 import * as THREE from 'three'
 
 import vertexShader from './vert.vs?raw'
-import fragmentShader from './frag2.fs?raw'
+import fragmentShader from './frag1.fs?raw'
 
 import { useTHREE } from '@/hooks/three'
 
@@ -27,39 +27,7 @@ const uniforms = {
   },
   u_time: {
     value: 0,
-  },
-  u_color: {
-    value: new THREE.Vector3(1, 1, 1),
-  },
-  u_r1: {
-    value: 0.1,
-  },
-  u_r2: {
-    value: 0.3,
-  },
-  u_r3: {
-    value: 0.5,
-  },
-  u_r4: {
-    value: 0.09,
-  },
-  u_yis: {
-    value: [true], // 挂的三爻变
-  },
-}
-
-function initYis() {
-  uniforms.u_yis.value.length = 0
-  for (let i = 0; i < 100; i++) {
-    uniforms.u_yis.value.push(random() > 0.5, random() > 0.5, random() > 0.5)
   }
-}
-initYis()
-
-function updateYis() {
-  uniforms.u_yis.value.forEach((yi, i) => {
-    uniforms.u_yis.value[i] = random() > 0.5
-  })
 }
 
 let t
@@ -80,29 +48,10 @@ function initMesh(): Array<THREE.Mesh> {
   return [mesh]
 }
 
-let lastTime = 0
-let updateGap = 1 // 秒
 function animate() {
   t = performance.now() / 1000
 
   uniforms.u_time.value = t
-  // const r = sin(t)
-  // const g = sin(t + 0.4)
-  // const b = sin(t + 0.2)
-
-  uniforms.u_r1.value = abs(sin(t) * 0.1)
-  uniforms.u_r2.value = abs(cos(t) * 0.1)
-  uniforms.u_r3.value = random() * 0.1
-
-  if (t % PI > 3.1) {
-    uniforms.u_color.value = new THREE.Vector3(random(), random(), random())
-  }
-  
-  const gap = t - lastTime
-  if (gap > updateGap) {
-    updateYis()
-    lastTime = t
-  }
 }
 
 function onMouseMove(e: MouseEvent) {

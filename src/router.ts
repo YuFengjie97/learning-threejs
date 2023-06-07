@@ -21,6 +21,10 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: 'patterns',
         component: () => import('@/views/shaderPatterns/index.vue')
+      },
+      {
+        path: 'noise',
+        component: () => import('@/views/shaderNoise/index.vue')
       }
     ],
   },
