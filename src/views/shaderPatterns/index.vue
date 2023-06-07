@@ -32,17 +32,34 @@ const uniforms = {
     value: new THREE.Vector3(1, 1, 1),
   },
   u_r1: {
-    value: 0.1
+    value: 0.1,
   },
   u_r2: {
-    value: 0.3
+    value: 0.3,
   },
   u_r3: {
-    value: 0.5
+    value: 0.5,
   },
   u_r4: {
-    value: 0.09
+    value: 0.09,
   },
+  u_yis: {
+    value: [true], // 挂的三爻变
+  },
+}
+
+function initYis() {
+  uniforms.u_yis.value.length = 0
+  for (let i = 0; i < 100; i++) {
+    uniforms.u_yis.value.push(random() > 0.5, random() > 0.5, random() > 0.5)
+  }
+}
+initYis()
+
+function updateYis() {
+  uniforms.u_yis.value.forEach((yi, i) => {
+    uniforms.u_yis.value[i] = random() > 0.5
+  })
 }
 
 let t
@@ -63,9 +80,11 @@ function initMesh(): Array<THREE.Mesh> {
   return [mesh]
 }
 
+let lastTime = 0
+let updateGap = 1 // 秒
 function animate() {
-  t = performance.now() / 1000;
-  
+  t = performance.now() / 1000
+
   uniforms.u_time.value = t
   // const r = sin(t)
   // const g = sin(t + 0.4)
@@ -78,7 +97,12 @@ function animate() {
   if (t % PI > 3.1) {
     uniforms.u_color.value = new THREE.Vector3(random(), random(), random())
   }
-
+  
+  const gap = t - lastTime
+  if (gap > updateGap) {
+    updateYis()
+    lastTime = t
+  }
 }
 
 function onMouseMove(e: MouseEvent) {

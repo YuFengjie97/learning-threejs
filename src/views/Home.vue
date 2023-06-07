@@ -1,7 +1,7 @@
 <template>
   <div class='home'>
     <h1>Shader</h1>
-    <RouterLink to="/shader/model-func">造型函数</RouterLink>
+    <RouterLink to="/shader/patterns">patterns</RouterLink>
 
 
     <h1>Chapter 1</h1>

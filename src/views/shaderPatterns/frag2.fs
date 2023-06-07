@@ -63,7 +63,7 @@ void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   vec3 color = vec3(0.0);
 
-  tile(st, 4.0);
+  tile(st, 8.0);
 
   rotateTilePattern(st);
 
