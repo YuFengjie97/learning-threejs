@@ -4,6 +4,10 @@ import NotFound from './views/NotFound.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/test',
+    component: () => import('@/views/t.vue')
+  },
+  {
     path: '/',
     component: () => import('@/views/Home.vue'),
   },

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "dat.gui": "^0.7.9",
+    "gsap": "^3.12.1",
     "three": "^0.146.0",
     "vite-plugin-glsl": "^1.1.2",
     "vue": "^3.2.37",
