@@ -1,13 +1,9 @@
 precision mediump float;
 
 #define PI 3.14159265358979323846
-#define yaoNum 300
 
 uniform vec2 u_resolution;
-uniform vec2 u_mouse;
 uniform float u_time;
-uniform vec3 u_color;
-uniform bool u_yis[yaoNum];
 
 const float w = 0.8; // 爻的宽度
 const float h = 0.1; // 爻的高度
@@ -15,7 +11,7 @@ const float yinGap = 0.2; // 阴爻中间的间距
 const float gap = 0.1; // 爻的间距
 
 float random(float seed) {
-  return fract(sin(seed) * 43758.5453123);
+  return fract(sin(seed) * u_time);
 }
 
 float genCorner(vec2 D, vec2 st) {
@@ -71,22 +67,22 @@ void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   vec3 color = vec3(0.0);
 
-  float col = 8.0;
+  float col = 4.0;
 
   st *= col;
-  int i = int(st.x) + int(st.y) * int(col);
-  st = fract(st);
 
+  vec2 ipos = floor(st);
+  st = fract(st);
   float b = genBound(st);
 
-  int a = (i * 3) % yaoNum;
-  bool y1 = u_yis[a];
-  bool y2 = u_yis[a + 1];
-  bool y3 = u_yis[a + 2];
+  bool y1 = random(ipos.x + ipos.y + 1.0) > 0.5;
+  bool y2 = random(ipos.x + ipos.y + 2.0) > 0.5;
+  bool y3 = random(ipos.x + ipos.y + 3.0) > 0.5;
 
   float yi = geneYi(st, y1, y2, y3);
 
-  color += (yi + b) * vec3(1.0);
+  color += yi;
+  color += b;
 
   gl_FragColor = vec4(color, 1.0);
 }
