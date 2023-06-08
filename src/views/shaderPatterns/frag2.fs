@@ -75,7 +75,7 @@ void main() {
 
   rotateTilePattern(st);
 
-  // rotate2D(st, 10.0 * sin(u_time));
+  rotate2D(st, 10.0 * sin(u_time));
 
   float t = triangle(st);
   color += t * vec3(1.0);
