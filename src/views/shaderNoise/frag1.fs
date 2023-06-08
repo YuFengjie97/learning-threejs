@@ -8,10 +8,19 @@ uniform vec3 u_color;
 
 #define PI 3.14159265359
 
+float random(vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) *
+    43758.5453123);
+}
+
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
 
-  vec3 color = vec3(1.0);
+  st *= 30.0;
+  vec2 ipos = floor(st);
+  vec2 fpos = fract(st);
+
+  vec3 color = vec3(random(ipos));
 
   gl_FragColor = vec4(color, 1.0);
 }
