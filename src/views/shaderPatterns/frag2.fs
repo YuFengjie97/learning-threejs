@@ -34,6 +34,14 @@ float triangle(vec2 st) {
   return z1 * z2 * z3;
 }
 
+// float triangle(vec2 st) {
+//   float pix = 50.0 / u_resolution.x;
+//   float z1 = smoothstep(0., -pix, st.y - st.x);
+//   float z2 = smoothstep(0., pix, st.y);
+//   float z3 = smoothstep(0., -pix, st.x - 1.);
+//   return z1 * z2 * z3;
+// }
+
 void rotate2D(inout vec2 st, float angle) {
   st -= 0.5;
   st = mat2(cos(angle), -sin(angle), sin(angle), cos(angle)) * st;
@@ -63,11 +71,11 @@ void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xx;
   vec3 color = vec3(0.0);
 
-  tile(st, 8.0);
+  tile(st, 2.0);
 
   rotateTilePattern(st);
 
-  rotate2D(st, 10.0 * sin(u_time ));
+  // rotate2D(st, 10.0 * sin(u_time));
 
   float t = triangle(st);
   color += t * vec3(1.0);
