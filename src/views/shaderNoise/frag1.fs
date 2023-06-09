@@ -1,4 +1,4 @@
-// 格子衬衫
+// 雪花随机噪音
 precision mediump float;
 
 uniform vec2 u_resolution;

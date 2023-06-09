@@ -1,4 +1,4 @@
-// 格子衬衫
+// 一个偶然发现
 precision mediump float;
 
 uniform vec2 u_resolution;
