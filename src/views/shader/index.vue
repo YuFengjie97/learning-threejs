@@ -14,7 +14,7 @@ import Stats from 'three/examples/jsm/libs/stats.module.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 import vertexShader from './vertex.glsl?raw'
-import fragmentShader from './fragment1.glsl?raw'
+import fragmentShader from './fragment2.glsl?raw'
 
 const { random, PI, floor, ceil, min, max, sin, cos } = Math
 
