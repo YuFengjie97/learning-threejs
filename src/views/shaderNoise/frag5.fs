@@ -24,14 +24,25 @@ float noise(vec2 st) {
   return mix(mix(dot(random2(i + vec2(0.0, 0.0)), f - vec2(0.0, 0.0)), dot(random2(i + vec2(1.0, 0.0)), f - vec2(1.0, 0.0)), u.x), mix(dot(random2(i + vec2(0.0, 1.0)), f - vec2(0.0, 1.0)), dot(random2(i + vec2(1.0, 1.0)), f - vec2(1.0, 1.0)), u.x), u.y);
 }
 
+float block(vec2 st, vec2 pos, float size) {
+  vec2 lb = pos - size / 2.0;
+  vec2 rt = pos + size / 2.0;
+  float l = lb.x;
+  float b = lb.y;
+  float r = rt.x;
+  float t = rt.y;
+
+  if(st.x >= l && st.x <= r && st.y >= b && st.y <= t) {
+    return noise(st * 20.0);
+    // return  1.0;
+  }
+  return 1.0;
+}
+
 void main() {
   vec2 st = gl_FragCoord.xy / u_resolution.xy;
-  st.x *= u_resolution.x / u_resolution.y;
-  vec3 color = vec3(0.0);
 
-  vec2 pos = vec2(st * 10.0);
+  float b = block(st, vec2(0.5), 0.4);
 
-  color = vec3(noise(pos) * .5 + .5);
-
-  gl_FragColor = vec4(color, 1.0);
+  gl_FragColor = vec4(vec3(b), 1.0);
 }
