@@ -7,12 +7,17 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('@/views/Home.vue'),
   },
+  
   {
     path: '/shader/',
     children: [
       {
         path: '',
         component: () => import('@/views/shader/index.vue'),
+      },
+      {
+        path: 'shape',
+        component: () => import('@/views/shape/index.vue'),
       },
       {
         path: 'matrices',
