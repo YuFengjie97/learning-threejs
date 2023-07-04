@@ -7,7 +7,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('@/views/Home.vue'),
   },
-  
+  {
+    path: '/loading-service',
+    component: () => import('@/views/Loading.vue')
+  },
   {
     path: '/shader/',
     children: [
