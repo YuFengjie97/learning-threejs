@@ -2,14 +2,14 @@
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import { read, utils, writeFile } from 'xlsx'
-import dataFull from '@/assets/xlsx/stats.xlsx?url'
+import dataFull from '@/assets/xlsx/stats3.xlsx?url'
 import dataPart from '@/assets/xlsx/stats2.xlsx?url'
 import { Key } from 'readline'
 
 const echartCon = ref()
 
 onMounted(async() => {
-  const f = await(await fetch(dataPart)).arrayBuffer()
+  const f = await(await fetch(dataFull)).arrayBuffer()
   const wb = read(f)
   const data = utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]]).reverse()
   console.log(data)
@@ -53,6 +53,41 @@ onMounted(async() => {
   type Key = keyof typeof keyMap
 
   const legendData = Object.keys(keyMap)
+  const legendSelected = {
+    注册: false,
+    注册充值: false,
+    注册充值金额: false,
+    日活: false,
+    日活充值: false,
+    日活首充: false,
+    日活充值金额: false,
+    Rich用户: false,
+    Rich用户活跃: false,
+    Rich用户充值: false,
+    Rich用户充值额: false,
+    最高同时在线: false,
+    开播: false,
+    进房: false,
+    进Party房: false,
+    上麦: false,
+    上Party: false,
+    关注: false,
+    加粉丝团: false,
+    送礼用户: false,
+    钻石支出: false,
+    金币收入: false,
+    送礼: false,
+    收礼: false,
+    下注: false,
+    返奖: false,
+    下注超10000: false,
+    新用户下注: false,
+    新用户返奖: false,
+    任务奖励: false,
+    活动奖励: false,
+    邀请奖励: false,
+    提现: false,
+  }
 
   const xAxisData = data.map((item) => {
     return item['日期']
@@ -74,6 +109,7 @@ onMounted(async() => {
       trigger: 'axis',
     },
     legend: {
+      selected: legendSelected,
       top: '2%',
       left: '10%',
       right: '10%',
@@ -103,7 +139,6 @@ onMounted(async() => {
         const item = {
           name: k,
           type: 'line',
-          stack: 'Total',
           data: v,
         }
         return item
