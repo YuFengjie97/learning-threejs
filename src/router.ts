@@ -9,7 +9,7 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/stats',
-    component: () => import('@/views/stats.vue')
+    component: () => import('@/views/Stats/index.vue')
   },
   
   {
