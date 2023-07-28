@@ -11,6 +11,7 @@
     "format-check": "prettier --check --cache ."
   },
   "dependencies": {
+    "@vueuse/core": "^10.2.1",
     "dat.gui": "^0.7.9",
     "echarts": "^5.4.2",
     "three": "^0.146.0",

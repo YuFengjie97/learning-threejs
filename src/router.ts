@@ -11,7 +11,10 @@ const routes: Array<RouteRecordRaw> = [
     path: '/stats',
     component: () => import('@/views/Stats/index.vue')
   },
-  
+  {
+    path: '/vue-use',
+    component: () => import('@/views/vueuse.vue')
+  },
   {
     path: '/shader/',
     children: [
