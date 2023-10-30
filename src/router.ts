@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { RouteRecordRaw } from 'vue-router'
 import NotFound from './views/NotFound.vue'
 
@@ -7,29 +7,29 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     component: () => import('@/views/Home.vue'),
   },
-  
   {
     path: '/shader/',
+    component: () => import('@/views/shader/index.vue'),
     children: [
       {
-        path: '',
-        component: () => import('@/views/shader/index.vue'),
+        path: 'normal',
+        component: () => import('@/views/shader/normal/index.vue'),
       },
       {
         path: 'shape',
-        component: () => import('@/views/shape/index.vue'),
+        component: () => import('@/views/shader/shape/index.vue'),
       },
       {
         path: 'matrices',
-        component: () => import('@/views/shaderMatrices/index.vue')
+        component: () => import('@/views/shader/matrices/index.vue')
       },
       {
         path: 'patterns',
-        component: () => import('@/views/shaderPatterns/index.vue')
+        component: () => import('@/views/shader/patterns/index.vue')
       },
       {
         path: 'noise',
-        component: () => import('@/views/shaderNoise/index.vue')
+        component: () => import('@/views/shader/noise/index.vue')
       }
     ],
   },

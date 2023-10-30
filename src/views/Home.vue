@@ -1,9 +1,5 @@
 <template>
   <div class='home'>
-    <h1>Shader</h1>
-    <RouterLink to="/shader/patterns">patterns</RouterLink>
-
-
     <h1>Chapter 1</h1>
     <RouterLink to="/chapter1/01-basic-skeleton">01-basic-skeleton</RouterLink>
     <RouterLink to="/chapter1/02-first-scene">02-first-scene</RouterLink>
