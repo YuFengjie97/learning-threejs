@@ -1,4 +1,4 @@
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { GUI } from 'dat.gui'
 import * as THREE from 'three'
 import Stats from 'three/examples/jsm/libs/stats.module.js'
@@ -10,11 +10,11 @@ export function useTHREE(initMesh: () => Array<THREE.Mesh>, animate: () => void)
   let width = window.innerWidth
   let height = window.innerHeight
   let stats: Stats
-  let orbitControls: OrbitControls | undefined = undefined
-  let scene: THREE.Scene | undefined = undefined
-  let camera: THREE.PerspectiveCamera | undefined = undefined
-  let renderer: THREE.WebGLRenderer | undefined = undefined
-  let gui: GUI | undefined = undefined
+  let orbitControls: OrbitControls | undefined
+  let scene: THREE.Scene | undefined
+  let camera: THREE.PerspectiveCamera | undefined
+  let renderer: THREE.WebGLRenderer | undefined
+  let gui: GUI | undefined
 
   function initGUI() {
     gui = new GUI({
@@ -72,7 +72,7 @@ export function useTHREE(initMesh: () => Array<THREE.Mesh>, animate: () => void)
 
   function addMesh() {
     const meshs = initMesh()
-    meshs.forEach(m => {
+    meshs.forEach((m) => {
       scene?.add(m)
     })
   }

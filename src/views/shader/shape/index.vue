@@ -1,61 +1,50 @@
-<template>
-  <div class="viewCon">
-    <div class="canvasCon" ref="canvasCon">
-      <canvas class="canvas" ref="canvasDom" @mousemove="onMouseMove" />
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
 import * as THREE from 'three'
 
+import { onMounted, ref } from 'vue'
 import vertexShader from './vert.vs?raw'
 import fragmentShader from './frag.fs?raw'
+import { initThree } from '@/utils'
 
-import { useTHREE } from '@/hooks/three'
-
-const { random, PI, floor, ceil, min, max, sin, cos, tan, abs } = Math
-
-const { canvasDom, canvasCon, width, height } = useTHREE(initMesh, animate)
-
-const uniforms = {
-  u_resolution: {
-    value: new THREE.Vector2(width, height),
-  },
-  u_mouse: {
-    value: new THREE.Vector2(width / 2, height / 2),
-  },
-  u_time: {
-    value: 0,
+const con = ref<HTMLElement>()
+onMounted(() => {
+  const { canvas, scene, render } = initThree(con.value!)
+  const { width, height } = canvas
+  let t = 0
+  const uniforms = {
+    u_resolution: {
+      value: new THREE.Vector2(width, height),
+    },
+    u_mouse: {
+      value: new THREE.Vector2(width / 2, height / 2),
+    },
+    u_time: {
+      value: 0,
+    },
   }
-}
 
-let t
+  canvas.addEventListener('mousemove', (e) => {
+    const { x, y } = con.value!.getBoundingClientRect()
+    uniforms.u_mouse.value.set(e.clientX - x, e.clientY - y)
+  })
 
-function initMesh(): Array<THREE.Mesh> {
   const shaderMaterial = new THREE.ShaderMaterial({
     uniforms,
     vertexShader,
     fragmentShader,
   })
-
   const geo = new THREE.PlaneGeometry(1000, 1000)
-
   const mesh = new THREE.Mesh(geo, shaderMaterial)
-
   mesh.position.set(10, 10, 10)
+  scene.add(mesh)
 
-  return [mesh]
-}
-
-function animate() {
-  t = performance.now() / 1000
-
-  uniforms.u_time.value = t
-
-}
-
-function onMouseMove(e: MouseEvent) {
-  uniforms.u_mouse.value.set(e.clientX, e.clientY)
-}
+  render(() => {
+    t = performance.now() / 1000
+    uniforms.u_time.value = t
+  })
+})
 </script>
+
+<template>
+  <div ref="con" class="h-full w-full" />
+</template>
