@@ -46,7 +46,7 @@ void main() {
   float s = justice(st);
   // s = strength(st);
   // s = death(st);
-  s = wall(st);
+  // s = wall(st);
   s = highPriestess(st);
   color = color * s;
 
