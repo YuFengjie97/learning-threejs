@@ -33,7 +33,9 @@ void main() {
   for(float k=-4.0;k<=4.0;k+=0.1) {
     float pct = gain(st.x, k);
     float cpct = plot(st, pct);
-    color += cpct * vec3(random(u_time/pct + k),random(k), random(u_time/tpct + k));
+    vec3 cc = cpct * vec3(random(u_time/pct + k),random(k), random(u_time/tpct + k));
+
+    color += cc;
   }
 
   gl_FragColor = vec4(color, 1.0);
