@@ -13,8 +13,7 @@ float SMOOTH(float D, float d) {
   return smoothstep(D - pix, D + pix, d);
 }
 
-float circle(vec2 st, float r) {
-  vec2 center = vec2(0.5);
+float circle(vec2 st, vec2 center,float r) {
   float dist = distance(st, center);
   return 1.0 - SMOOTH(r, dist);
 }
@@ -49,16 +48,27 @@ vec3 hsb2rgb(in vec3 c) {
 }
 
 void main() {
-  vec2 st = gl_FragCoord.xy / min(u_resolution.x, u_resolution.y);
+
   pix = 1.0 / u_resolution.x;
   vec3 color = vec3(0.0);
 
-  vec2 toCenter = vec2(0.5) - st;
+
+/**
+  如果分辨率y小于x，就是以y为基准进行坐标归一化，中心位置：z/0.5=ux/uy，z就是要找的以y为基准归一化后，x方向的归一化坐标
+  如果x<y，0.5/z=ux/uy
+  比例式相等关键：归一化后的坐标比例与之前未归一化相等
+*/
+  float ux = u_resolution.x;
+  float uy = u_resolution.y;
+  vec2 st = ux < uy ? gl_FragCoord.xy / ux : gl_FragCoord.xy / uy;
+  vec2 center = ux < uy ? vec2(0.5, uy/ux*0.5) : vec2(ux/uy*0.5, 0.5);
+
+  vec2 toCenter = center - st;
   float angle = atan(toCenter.y, toCenter.x) + bounceOut( sin(u_time));
   float radius = length(toCenter) * 2.0;
   vec3 c = hsb2rgb(vec3((angle / TWO_PI) + 0.5, radius, 1.0));
 
-  float pct = circle(st, 0.4) - circle(st, 0.3);
+  float pct = circle(st, center,0.4) - circle(st, center,0.3);
 
   color = pct * c;
 
