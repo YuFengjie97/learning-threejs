@@ -4,8 +4,7 @@ precision mediump float;
 
 #define PI 3.14159265358979323846
 
-uniform vec2 u_resolution;
-uniform float u_time;
+uniform vec2 iResolution;
 
 float pix;
 
@@ -38,9 +37,9 @@ float highPriestess(vec2 st) {
 }
 
 void main() {
-  pix = 1.0 / u_resolution.x;
+  pix = 1.0 / iResolution.x;
 
-  vec2 st = gl_FragCoord.xy / u_resolution.xx;
+  vec2 st = gl_FragCoord.xy / iResolution.xx;
   vec3 color = vec3(1.0);
 
   float s = justice(st);

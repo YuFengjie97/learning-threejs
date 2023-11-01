@@ -4,8 +4,8 @@ precision mediump float;
 
 #define TWO_PI 6.28318530718
 
-uniform vec2 u_resolution;
-uniform float u_time;
+uniform vec2 iResolution;
+uniform float iTime;
 
 float pix;
 
@@ -49,7 +49,7 @@ vec3 hsb2rgb(in vec3 c) {
 
 void main() {
 
-  pix = 1.0 / u_resolution.x;
+  pix = 1.0 / iResolution.x;
   vec3 color = vec3(0.0);
 
 
@@ -58,13 +58,13 @@ void main() {
   如果x<y，0.5/z=ux/uy
   比例式相等关键：归一化后的坐标比例与之前未归一化相等
 */
-  float ux = u_resolution.x;
-  float uy = u_resolution.y;
+  float ux = iResolution.x;
+  float uy = iResolution.y;
   vec2 st = ux < uy ? gl_FragCoord.xy / ux : gl_FragCoord.xy / uy;
   vec2 center = ux < uy ? vec2(0.5, uy/ux*0.5) : vec2(ux/uy*0.5, 0.5);
 
   vec2 toCenter = center - st;
-  float angle = atan(toCenter.y, toCenter.x) + bounceOut( sin(u_time));
+  float angle = atan(toCenter.y, toCenter.x) + bounceOut( sin(iTime));
   float radius = length(toCenter) * 2.0;
   vec3 c = hsb2rgb(vec3((angle / TWO_PI) + 0.5, radius, 1.0));
 

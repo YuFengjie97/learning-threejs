@@ -4,9 +4,8 @@
 precision mediump float;
 #endif
 
-uniform float u_time;
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
+uniform float iTime;
+uniform vec2 iResolution;
 
 // 造型函数
 float gain(float x, float k) {
@@ -40,13 +39,13 @@ vec3 hsb2rgb(in vec3 c) {
 }
 
 void main() {
-  vec2 st = gl_FragCoord.xy / u_resolution;
+  vec2 st = gl_FragCoord.xy / iResolution;
   vec3 color = vec3(0.0);
 
   for(float k = -4.0; k <= 4.0; k += 0.1) {
     float pct = gain(st.x, k);
     float cpct = plot(st, pct);
-    vec3 hsl = vec3(sin(u_time + k),1.0,0.5);
+    vec3 hsl = vec3(sin(iTime + k),1.0,0.5);
     vec3 rgb = hsb2rgb(hsl);
 
     color += cpct * rgb;
