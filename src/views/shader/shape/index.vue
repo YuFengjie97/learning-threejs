@@ -7,7 +7,9 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './色轮.fs?raw'
 // import fragmentShader from './塔罗牌.fs?raw'
 // import fragmentShader from './造型函数.fs?raw'
-import fragmentShader from './雷达.fs?raw'
+// import fragmentShader from './雷达.fs?raw'
+// import fragmentShader from './shadertoy_line.fs?raw'
+import fragmentShader from './shadertoy_色条.fs?raw'
 
 import { initThree } from '@/utils'
 
