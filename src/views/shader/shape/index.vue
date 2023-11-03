@@ -12,7 +12,9 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './shadertoy_line.fs?raw'
 // import fragmentShader from './shadertoy_色条.fs?raw'
 // import fragmentShader from './shadertoy_art.fs?raw'
-import fragmentShader from './sin.fs?raw'
+// import fragmentShader from './line.fs?raw'
+// import fragmentShader from './line2.fs?raw'
+import fragmentShader from './line3.fs?raw'
 
 import { initThree } from '@/utils'
 
