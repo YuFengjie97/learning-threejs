@@ -7,6 +7,7 @@ uniform float iTime;
 float pix;
 
 float plotSin(vec2 st) {
+  // st.x使用cos加点变化
   float pct = st.y - sin(cos(st.x) * 10. + iTime) / 10.;
   float pixs = pix * 40.0;
   return 1.0 - smoothstep(0.02 - pixs, 0.02+pixs, abs(pct));
