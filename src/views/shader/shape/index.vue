@@ -23,7 +23,7 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './shadertoy_art.fs?raw'
 // import fragmentShader from './line.fs?raw'
 // import fragmentShader from './line2.fs?raw'
-import fragmentShader from './line_sdf.fs'
+import fragmentShader from './sdf_segement.fs'
 
 import { initThree } from '@/utils'
 

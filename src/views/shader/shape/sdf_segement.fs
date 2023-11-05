@@ -19,8 +19,8 @@ void main() {
 
   vec2 center = iResolution.xy / 2.0;
 
-  float line = 1.0 - step(4., (sdSegment(gl_FragCoord.xy, center, iMouse)));
-  finc += line * vec3(1.0, 0.0, 0.0);
+  float seg = 1.0 - step(4., (sdSegment(gl_FragCoord.xy, center, iMouse)));
+  finc += seg * vec3(1.0, 0.0, 0.0);
 
   float cir1 = 1.0 - smoothstep(0., 10., distance(center, gl_FragCoord.xy) - 5.0);
   float cir2 = 1.0 - smoothstep(0., 10., distance(iMouse, gl_FragCoord.xy) - 5.0);
