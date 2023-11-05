@@ -1,5 +1,13 @@
 <script lang="ts" setup>
-import * as THREE from 'three'
+import {
+  GLSL3,
+  Mesh,
+  PlaneGeometry,
+  RawShaderMaterial,
+  ShaderMaterial,
+  Vector2,
+
+} from 'three'
 
 import { onMounted, ref } from 'vue'
 import vertexShader from './vert.vs?raw'
@@ -14,7 +22,7 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './shadertoy_art.fs?raw'
 // import fragmentShader from './line.fs?raw'
 // import fragmentShader from './line2.fs?raw'
-import fragmentShader from './line5.fs?raw'
+import fragmentShader from './line5.fs'
 
 import { initThree } from '@/utils'
 
@@ -25,10 +33,10 @@ onMounted(() => {
   let t = 0
   const uniforms = {
     iResolution: {
-      value: new THREE.Vector2(width, height),
+      value: new Vector2(width, height),
     },
     iMouse: {
-      value: new THREE.Vector2(width / 2, height / 2),
+      value: new Vector2(width / 2, height / 2),
     },
     iTime: {
       value: 0,
@@ -40,13 +48,22 @@ onMounted(() => {
     uniforms.iMouse.value.set(e.clientX - x, e.clientY - y)
   })
 
-  const shaderMaterial = new THREE.ShaderMaterial({
+  const shaderMaterial = new ShaderMaterial({
+    extensions: {
+      derivatives: '#extension GL_OES_standard_derivatives : enable',
+    },
     uniforms,
     vertexShader,
     fragmentShader,
   })
-  const geo = new THREE.PlaneGeometry(1000, 1000)
-  const mesh = new THREE.Mesh(geo, shaderMaterial)
+  // const shaderMaterial = new RawShaderMaterial({
+  //   uniforms,
+  //   vertexShader,
+  //   fragmentShader,
+  //   glslVersion: GLSL3,
+  // })
+  const geo = new PlaneGeometry(1000, 1000)
+  const mesh = new Mesh(geo, shaderMaterial)
   mesh.position.set(10, 10, 10)
   scene.add(mesh)
 

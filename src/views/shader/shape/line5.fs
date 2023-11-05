@@ -4,39 +4,23 @@ precision mediump float;
 uniform vec2 iResolution;
 uniform float iTime;
 
-float pix;
-
-float w = 0.05;
-
-float plotSinX(vec2 uv, float k) {
-  float pct = uv.y - sin(cos(uv.x * 8.0+k) + iTime) / 3. - 0.5;
-  float pixs = pix * 80.0;
-  return 1.0 - smoothstep(w - pixs, w+pixs, abs(pct));
-}
-
-float plotSinY(vec2 uv, float k) {
-  float pct = uv.x - sin(cos(uv.y * 8.0+k) + iTime) / 3. - 0.5;
-  float pixs = pix * 80.0;
-  return 1.0 - smoothstep(w - pixs, w+pixs, abs(pct));
-}
-
-// https://iquilezles.org/articles/palettes/
-vec3 palette(float t) {
-  vec3 a = vec3(0.186, 0.966, 0.731);
-  vec3 b = vec3(0.199, 0.400, 0.604);
-  vec3 c = vec3(1.432, 0.024, 0.755);
-  vec3 d = vec3(0.048, 2.989, 2.952);
-
-  float TWO_PI = 2.0 * PI;
-  return a + b * cos(TWO_PI * (c * t + d));
-}
+#include "../../../../lygia/generative/voronoi.glsl"
+#include "../../../../lygia/generative/curl.glsl"
+#include "../../../../lygia/generative/worley.glsl"
+#include "../../../../lygia/math/highPass.glsl"
+#include "../../../../lygia/color/palette.glsl"
 
 void main() {
-  vec2 st = gl_FragCoord.xy / iResolution.y;
+  vec4 final = vec4(1.0, 0.0, 0.0, 1.0);
 
-  pix = 1. / iResolution.y;
+  vec2 uv = gl_FragCoord.xy / iResolution * vec2(iResolution.x / iResolution.y, 1.0);
+  float t = iTime * 0.25;
 
-  vec3 finc = vec3(0.0);
-
-  gl_FragColor = vec4(finc, 1.0);
+  vec3 c = curl(vec3(uv * 3.0, iTime * 0.05));
+  float w = worley(vec3(uv * 20.0 * c.yz + c.x, c.x));
+  vec3 v = voronoi(uv * 2.0, w * length(c) * c.r + t);
+  vec3 p = palette(v.b * 2.0, vec3(0.7, sin(t * 1.1) * 0.2, 0.0), vec3(0.3, 0.2, cos(t * 1.2)), vec3(sin(t * 0.8), 0.2, 0.3), vec3(0.2, 0.2, cos(t * 0.9)));
+  final.r = smoothstep(0.9, 0.91, length(v));
+  final.rgb = mix(vec3(0.2) - p, p, final.r);
+  gl_FragColor = final;
 }
