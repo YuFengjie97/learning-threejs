@@ -14,7 +14,7 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './shadertoy_art.fs?raw'
 // import fragmentShader from './line.fs?raw'
 // import fragmentShader from './line2.fs?raw'
-import fragmentShader from './line4.fs?raw'
+import fragmentShader from './line5.fs?raw'
 
 import { initThree } from '@/utils'
 
