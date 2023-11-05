@@ -23,7 +23,7 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './shadertoy_art.fs?raw'
 // import fragmentShader from './line.fs?raw'
 // import fragmentShader from './line2.fs?raw'
-import fragmentShader from './line_noise_3.fs'
+import fragmentShader from './line_sdf.fs'
 
 import { initThree } from '@/utils'
 
@@ -44,9 +44,9 @@ onMounted(() => {
     },
   }
 
+  const { x, y, height: conH } = con.value!.getBoundingClientRect()
   canvas.addEventListener('mousemove', (e) => {
-    const { x, y } = con.value!.getBoundingClientRect()
-    uniforms.iMouse.value.set(e.clientX - x, e.clientY - y)
+    uniforms.iMouse.value.set(e.clientX - x, conH - (e.clientY - y))
   })
 
   const shaderMaterial = new ShaderMaterial({
