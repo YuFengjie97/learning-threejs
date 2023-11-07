@@ -5,7 +5,7 @@ uniform float iTime;
 uniform vec2 iMouse;
 
 float pix;
-float PI = 3.1415926535898;
+float PI = 3.141592653589793;
 
 float SMOOTH(float D, float d, float pixNum) {
   return smoothstep(D - pixNum * pix, D + pixNum * pix, d);
@@ -49,31 +49,38 @@ float polar(vec2 st, float gap) {
   return res;
 }
 
+// vec2 toPolar(vec2 st) {
+//   // vec2(r, θ)
+//   float r = length(st);
+//   float a;
+
+//   if(st.x > 0. && st.y > 0.) {
+//     a = atan(st.y / st.x);
+//   }
+//   if(st.x < 0. && st.y > 0.) {
+//     a = atan(st.y / abs(st.x)) + PI;
+//   }
+//   if(st.x < 0. && st.y < 0.) {
+//     a = atan(abs(st.y) / abs(st.x)) + PI;
+//   }
+//   if(st.x > 0. && st.y < 0.) {
+//     a = atan(st.y / abs(st.x)) + PI * 2.;
+//   }
+
+//   return vec2(r, a);
+// }
+
 vec2 toPolar(vec2 st) {
-  // vec2(r, θ)
   float r = length(st);
-  float a;
+  float theta = mod(atan(st.y, st.x ) + PI/2.0 + PI, 2.0*PI) - PI;
 
-  if(st.x > 0. && st.y > 0.) {
-    a = atan(st.y / st.x);
-  }
-  if(st.x < 0. && st.y > 0.) {
-    a = atan(st.y / abs(st.x)) + PI;
-  }
-  if(st.x < 0. && st.y < 0.) {
-    a = atan(abs(st.y) / abs(st.x)) + PI;
-  }
-  if(st.x > 0. && st.y < 0.) {
-    a = atan(st.y / abs(st.x)) + PI * 2.;
-  }
-
-  return vec2(r, a);
+  return vec2(r, theta);
 }
 
 void main() {
   pix = 1.0 / iResolution.y;
 
-  vec2 st = (gl_FragCoord.xy * 2.0 - iResolution.xy) / iResolution.y;
+  vec2 st = (gl_FragCoord.xy * 2.0 - iResolution.xy) / min(iResolution.x, iResolution.y);
   st = toPolar(st);
 
   vec3 c_fin = vec3(0.0);
@@ -81,6 +88,11 @@ void main() {
 
   float pol = polar(st, 0.1);
   c_fin += c_white * pol;
+
+  st.x *= 10.;
+
+  float s1 = 1. - SMOOTH(0., st.x - 5. * sin(4. * st.y), 10.);
+  c_fin += s1 * c_white;
 
   gl_FragColor = vec4(c_fin, 1.0);
 }
