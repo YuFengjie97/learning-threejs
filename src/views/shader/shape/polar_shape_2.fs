@@ -23,16 +23,12 @@ vec2 toPolar(vec2 st) {
 }
 
 // See https://iquilezles.org/articles/palettes for more information
-vec3 pal(in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d) {
-  return a + b * cos(6.28318 * (c * t + d));
-}
-
 vec3 palette(float t) {
   vec3 a = vec3(0.610, 0.498, 0.650);
   vec3 b = vec3(0.388, 0.498, 0.350);
   vec3 c = vec3(0.530, 0.498, 0.620);
   vec3 d = vec3(3.438, 3.012, 4.025);
-  return pal(t, a, b, c, d);
+  return a + b * cos(6.28318 * (c * t + d));
 }
 
 void main() {
