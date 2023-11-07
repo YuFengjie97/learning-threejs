@@ -67,8 +67,9 @@ void main() {
 
   st.x *= 10.;
 
-  float s1 = 1. - SMOOTH(0., st.x - abs(5. * sin(4. * st.y)), 10.);
-  c_fin += s1 * c_white;
+  float v = st.x - abs(5. * sin(4. * st.y));
+  float s1 = 1. - smoothstep(-0.,1., v);
+  c_fin = mix(c_fin, c_white, s1);
 
   gl_FragColor = vec4(c_fin, 1.0);
 }
