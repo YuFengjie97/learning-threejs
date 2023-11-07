@@ -72,7 +72,7 @@ float polar(vec2 st, float gap) {
 
 vec2 toPolar(vec2 st) {
   float r = length(st);
-  float theta = mod(atan(st.y, st.x ) + PI/2.0 + PI, 2.0*PI) - PI;
+  float theta = mod( atan(st.y,st.x), 2.*PI);
 
   return vec2(r, theta);
 }
