@@ -35,40 +35,16 @@ float SMOOTH(float D, float d, float pixNum) {
 
 float polar(vec2 st, float gap) {
   float res = 0.0;
-
   // 同心圆
   for(float r = 0.0; r < 2.0; r += gap) {
     res += 1. - SMOOTH(0., abs(st.x - r), 4.);
   }
-
   //直线
   for(float a = 0.; a <= 2.0; a += .25) {
-    res += 1. - SMOOTH(0., abs(PI * a - st.y), 40.);
+    res += 1. - SMOOTH(0., abs(PI * a - st.y), 10.);
   }
-
   return res;
 }
-
-// vec2 toPolar(vec2 st) {
-//   // vec2(r, θ)
-//   float r = length(st);
-//   float a;
-
-//   if(st.x > 0. && st.y > 0.) {
-//     a = atan(st.y / st.x);
-//   }
-//   if(st.x < 0. && st.y > 0.) {
-//     a = atan(st.y / abs(st.x)) + PI;
-//   }
-//   if(st.x < 0. && st.y < 0.) {
-//     a = atan(abs(st.y) / abs(st.x)) + PI;
-//   }
-//   if(st.x > 0. && st.y < 0.) {
-//     a = atan(st.y / abs(st.x)) + PI * 2.;
-//   }
-
-//   return vec2(r, a);
-// }
 
 vec2 toPolar(vec2 st) {
   float r = length(st);
@@ -91,7 +67,7 @@ void main() {
 
   st.x *= 10.;
 
-  float s1 = 1. - SMOOTH(0., st.x - 5. * sin(4. * st.y), 10.);
+  float s1 = 1. - SMOOTH(0., st.x - abs(5. * sin(4. * st.y)), 10.);
   c_fin += s1 * c_white;
 
   gl_FragColor = vec4(c_fin, 1.0);
