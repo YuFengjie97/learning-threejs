@@ -44,8 +44,10 @@ void main() {
   vec3 c1 = palette(abs(sin(st.y - iTime)));
   float roateSpeed = PI * easeOutQuart(abs(sin(iTime)));
   float scale = 10. * clamp(abs(sin(iTime)), 0.1, 1.0);
-  float s1 = 1. - SMOOTH(0., st.x - abs(scale * sin(4. * (st.y + roateSpeed))), 4.);
-  c_fin += s1 * c1;
+  float v = st.x - abs(scale * sin(4. * (st.y + roateSpeed)));
+  float s = smoothstep(0.,1.,v);
+  c_fin = mix(c1, c_fin, s);
+  // c_fin += c1 * s;
 
   gl_FragColor = vec4(c_fin, 1.0);
 }
