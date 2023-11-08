@@ -4,7 +4,6 @@ uniform vec2 iResolution;
 uniform float iTime;
 uniform vec2 iMouse;
 
-float pix;
 float PI = 3.141592653589793;
 
 vec2 toPolar(vec2 st) {
@@ -24,8 +23,6 @@ vec3 palette(float t) {
 }
 
 void main() {
-  pix = 1.0 / iResolution.y;
-
   vec2 st = (gl_FragCoord.xy * 2.0 - iResolution.xy) / min(iResolution.x, iResolution.y);
   st = toPolar(st);
 
