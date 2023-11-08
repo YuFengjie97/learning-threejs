@@ -8,7 +8,8 @@ float PI = 3.141592653589793;
 
 vec2 toPolar(vec2 st) {
   float r = length(st);
-  float theta = mod(atan(st.y, st.x), 2. * PI);
+  // float theta = mod(atan(st.y, st.x), 2. * PI);
+  float theta = atan(st.y, st.x);
 
   return vec2(r, theta);
 }
