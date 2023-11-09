@@ -22,8 +22,11 @@ import vertexShader from './vert.vs?raw'
 
 // import fragmentShader from './shadertoy_art.fs?raw'
 // import fragmentShader from './line.fs?raw'
-// import fragmentShader from './line2.fs?raw'
-import fragmentShader from './polar_shape.fs'
+// import fragmentShader from './polar_shape_5.fs'
+
+import fragmentShader from './test.fs'
+
+// import fragmentShader from './sdf_triangle.fs'
 
 import { initThree } from '@/utils'
 

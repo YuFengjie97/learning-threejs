@@ -1,3 +1,4 @@
+// 蝴蝶函数
 precision mediump float;
 
 uniform vec2 iResolution;
