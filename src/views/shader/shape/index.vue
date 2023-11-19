@@ -24,7 +24,7 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './line.fs?raw'
 // import fragmentShader from './polar_shape_5.fs'
 
-import fragmentShader from './test.fs'
+import fragmentShader from './line_noise_3.fs'
 
 // import fragmentShader from './sdf_triangle.fs'
 

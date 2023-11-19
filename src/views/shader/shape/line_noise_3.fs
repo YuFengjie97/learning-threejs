@@ -4,25 +4,20 @@ precision mediump float;
 uniform vec2 iResolution;
 uniform float iTime;
 
-float pix;
-
-float SMOOTH(float D, float d, float pixNum) {
-  return smoothstep(D - pixNum * pix, D + pixNum * pix, d);
+float rand(float x) {
+  return fract(sin(x) * 1.0);
 }
 
-float hash11(float p)
-{
-    p = fract(p * .1031);
-    p *= p + 33.33;
-    p *= p + p;
-    return fract(p);
+float noise(float x) {
+  float i = floor(x);
+  float f = fract(x);
+  return mix(rand(i), rand(i + 1.0), smoothstep(0., 1., f));
 }
 
-float plot(vec2 st, float k) {
-  return 1. - SMOOTH(0., abs(st.y - hash11(st.x + k)), 100.);
+float plot(vec2 st) {
+  return 1. - smoothstep(0., 0.3, abs(st.y-noise(st.x)));
 }
 
-// https://iquilezles.org/articles/palettes/
 vec3 palette(float t) {
   vec3 a = vec3(0.186, 0.966, 0.731);
   vec3 b = vec3(0.199, 0.400, 0.604);
@@ -35,18 +30,15 @@ vec3 palette(float t) {
 
 void main() {
   vec2 st = gl_FragCoord.xy / iResolution.y;
-  pix = 1. / iResolution.y;
   vec3 finc = vec3(0.0);
+  st.y -= 0.5;
+  st *= 10.;
 
-  float ratio = 4.;
-
-  st *= ratio;
-  st.y -= 1.;
-  st.x += iTime;
-
-  for(float k = 0.; k < 1.; k += 1.) {
-    vec3 c = palette(hash11(st.x - k + iTime * 0.001));
-    finc += c * plot(st, k);
+  for(float i=0.;i<4.;i++) {
+    vec2 uv = st;
+    uv.x += iTime + i;
+    float l1 = plot(uv);
+    finc = mix(finc, palette(i), l1);
   }
 
   gl_FragColor = vec4(finc, 1.0);
