@@ -38,20 +38,19 @@ vec2 rotate(vec2 p, float a) {
 }
 
 vec3 createBox(vec2 st, float seed) {
-  float i = (noise(sin(iTime+seed)));
+  float i = (noise(iTime+seed))*10.;
 
-  float theta = sin(noise(iTime*i)) * PI*4.;
+  float theta = sin(noise(iTime+i)) * PI*4.;
   st = rotate(st, theta);
-  float w = abs(sin(noise(iTime*i)));
-  float h = abs(sin(noise(iTime*i+1.)));
-  float xoff = (sin(noise(iTime*i)))/10.;
-  float yoff = (sin(noise(iTime*i+1.)))/10.;
+  float size = abs(sin(noise(iTime+i)));
+  float xoff = (sin(noise(iTime+i)))/10.;
+  float yoff = (sin(noise(iTime+i)))/10.;
   st += vec2(xoff,yoff);
   vec3 color = palette(noise(iTime*i));
 
-  float box = sdBox(st,vec2(w,h));
-  float smoothStart = abs(sin(noise(iTime * i)))*10.*pix;
-  float smoothEnd = abs(sin(noise(iTime * i)))*30.*pix;
+  float box = sdBox(st,vec2(size,size));
+  float smoothStart = abs(sin(noise(iTime + i)))*10.*pix;
+  float smoothEnd = abs(sin(noise(iTime + i)))*40.*pix;
   float b = 1. - smoothstep(smoothStart,smoothEnd,abs(box-0.1));
 
   return b*color;
