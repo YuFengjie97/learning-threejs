@@ -7,7 +7,7 @@ float PI = 3.1415926;
 float pix;
 
 float rand(float x) {
-  return fract(sin(x*1000.));
+  return fract(sin(x));
 }
 
 float noise(float x) {
