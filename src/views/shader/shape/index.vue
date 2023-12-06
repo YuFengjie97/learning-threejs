@@ -25,7 +25,8 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './polar_shape_5.fs'
 // import fragmentShader from './line_noise_3.fs'
 // import fragmentShader from './sdf_triangle.fs'
-import fragmentShader from './circle.fs'
+// import fragmentShader from './circle.fs'
+import fragmentShader from './noise.fs'
 
 import { initThree } from '@/utils'
 
