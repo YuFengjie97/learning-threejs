@@ -25,7 +25,6 @@ float cirlceMore(vec2 st, vec2 center) {
 vec3 getCC(vec2 st, vec2 pos, vec3 color) {
   float c = cirlceMore(st, pos);
   return c * color;
-  return vec3(1.);
 }
 
 void main() {
