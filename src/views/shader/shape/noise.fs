@@ -1,3 +1,4 @@
+// 使用sdf来绘制图形，使用一维noise来定义他的旋转平移缩放，颜色
 precision mediump float;
 
 uniform vec2 iResolution;

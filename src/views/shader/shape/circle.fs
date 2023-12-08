@@ -1,3 +1,4 @@
+// 多组circle重叠绘制色彩
 precision mediump float;
 
 uniform vec2 iResolution;
