@@ -28,7 +28,8 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './circle.fs'
 // import fragmentShader from './noise.fs'
 // import fragmentShader from './circle_noise.fs'
-import fragmentShader from './mandelbrot.fs'
+// import fragmentShader from './mandelbrot.fs'
+import fragmentShader from './loading.fs'
 
 import { initThree } from '@/utils'
 
@@ -83,3 +84,10 @@ onMounted(() => {
 <template>
   <div ref="con" class="h-full w-full" />
 </template>
+
+<style>
+a{
+  color: rgb(253, 121, 168);
+  color:rgb(232, 67, 147);
+}
+</style>
