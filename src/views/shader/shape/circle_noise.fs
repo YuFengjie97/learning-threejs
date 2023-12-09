@@ -1,3 +1,5 @@
+// 一个圆用noise来根据角度去顶距离，比较柔和的变化，然后，多组在4个方向上重叠在一起
+
 precision mediump float;
 
 uniform vec2 iResolution;
