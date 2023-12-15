@@ -12,6 +12,13 @@ vec2 rotate(vec2 p, float a) {
   mat2 matrix = mat2(c, -s, s, c);
   return p * matrix;
 }
+// 一般是返回旋转矩阵
+// mat2 rotate(vec2 p, float a) {
+//   float s = sin(a);
+//   float c = cos(a);
+//   return mat2(c, -s, s, c);
+// }
+
 
 float easeOutElastic(float x) {
   float c4 = (2. * PI) / 3.;

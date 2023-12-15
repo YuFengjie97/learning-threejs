@@ -29,7 +29,11 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './noise.fs'
 // import fragmentShader from './circle_noise.fs'
 // import fragmentShader from './mandelbrot.fs'
-import fragmentShader from './loading.fs'
+// import fragmentShader from './loading_2.fs'
+// import fragmentShader from './valuenoise.fs'
+import fragmentShader from './pattern_circle_gradientNoise.fs'
+
+// import fragmentShader from './pattern_circle_valueNoise.fs'
 
 import { initThree } from '@/utils'
 
@@ -56,9 +60,9 @@ onMounted(() => {
   })
 
   const shaderMaterial = new ShaderMaterial({
-    extensions: {
-      derivatives: '#extension GL_OES_standard_derivatives : enable',
-    },
+    // extensions: {
+    //   derivatives: '#extension GL_OES_standard_derivatives : enable',
+    // },
     uniforms,
     vertexShader,
     fragmentShader,
