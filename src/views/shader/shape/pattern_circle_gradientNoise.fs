@@ -78,6 +78,7 @@ void main() {
   // float c = circle(uv, center, rn);
   // color_fin += color * c;
   float n = fbm(uv);
+  // float n = noise(uv);
   color_fin += vec3(1.) * n;
 
   gl_FragColor = vec4(color_fin, 1.);

@@ -31,9 +31,10 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './mandelbrot.fs'
 // import fragmentShader from './loading_2.fs'
 // import fragmentShader from './valuenoise.fs'
-import fragmentShader from './pattern_circle_gradientNoise.fs'
+// import fragmentShader from './pattern_circle_gradientNoise.fs'
+// import fragmentShader from './frog_valueNoise_fbm.fs'
 
-// import fragmentShader from './pattern_circle_valueNoise.fs'
+import fragmentShader from './pattern_circle_valueNoise.fs'
 
 import { initThree } from '@/utils'
 
