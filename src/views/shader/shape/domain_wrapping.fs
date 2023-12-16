@@ -30,10 +30,15 @@ float noise(vec2 uv) {
 }
 
 vec3 palette(float t) {
-  vec3 a = vec3(1.000, 0.500, 0.500);
-  vec3 b = vec3(0.500, 0.500, 0.500);
-  vec3 c = vec3(0.750, 1.000, 0.667);
-  vec3 d = vec3(0.800, 1.000, 0.333);
+  // vec3 a = vec3(1.000, 0.500, 0.500);
+  // vec3 b = vec3(0.500, 0.500, 0.500);
+  // vec3 c = vec3(0.750, 1.000, 0.667);
+  // vec3 d = vec3(0.800, 1.000, 0.333);
+
+  vec3 a = vec3(0.000, 0.500, 0.500);
+  vec3 b = vec3(0.000, 0.500, 0.500);
+  vec3 c = vec3(0.000, 0.500, 0.333);
+  vec3 d = vec3(0.000, 0.500, 0.667);
   return a + b * cos(6.28318 * (c * t + d));
 }
 
@@ -56,15 +61,15 @@ float fbm(vec2 uv) {
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / iResolution.y;
+  vec2 uv = (gl_FragCoord.xy - iResolution.xy * 0.5) / iResolution.y * 10.;
   vec3 color_fin = vec3(0.0);
 
-  vec2 pos = uv * 10.;
-  float a = noise(pos * vec2(cos(iTime * 0.1), sin(iTime * 0.1)) * 0.5) * PI * 2.;
-  float col = noise(vec2(1.) * a);
+  float uvt = sin(length(uv) - iTime);
+  vec2 uv2 = uv * fbm(uv) * uvt;
 
-  float c = fbm(pos);
-  color_fin += c * palette(col);
+  vec3 col = palette(fbm(uv2));
+
+  color_fin += col;
 
   gl_FragColor = vec4(color_fin, 1.);
 }
