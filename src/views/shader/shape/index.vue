@@ -33,7 +33,8 @@ import vertexShader from './vert.vs?raw'
 // import fragmentShader from './valuenoise.fs'
 // import fragmentShader from './pattern_circle_gradientNoise.fs'
 // import fragmentShader from './frog_valueNoise_fbm.fs'
-import fragmentShader from './domain_wrapping.fs'
+// import fragmentShader from './domain_wrapping.fs'
+import fragmentShader from './kunkun.fs'
 
 // import fragmentShader from './pattern_circle_valueNoise.fs'
 

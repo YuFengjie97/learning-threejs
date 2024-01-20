@@ -31,6 +31,7 @@
 .link-wrap {
   padding: 1rem;
   display: flex;
+  display: none;
   flex-flow: column nowrap;
   @media screen and (max-width: 576px) {
     padding: 1rem;
